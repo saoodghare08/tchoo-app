@@ -1,0 +1,163 @@
+.contact-support-secction {
+    // width: 480px;
+    height: 100%;
+    // margin: 0 auto;
+    // overflow-y: auto;
+    // box-shadow: 0 10px 20px rgb(167 167 167 / 19%), 0 6px 6px rgb(131 131 131 / 23%);
+
+    /* TOP WRAPPER */
+    .top-wrapper {
+        background-color: #02044A;
+        padding: 20px 20px 30px 20px;
+
+        h2 {
+            color: #FFFFFF;
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 36px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            color: #E4E4E4;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 24px;
+        }
+
+        .reach-us-form {
+            margin-top: 28px;
+            h3 {
+                color: #E4E4E4;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 24px;
+                margin-bottom: 20px;
+            }
+
+            .input-group {
+                height: 48px;
+                border: 1.5px solid #DEDEDE;
+                border-radius: 8px;
+                position: relative;
+
+                .icons {
+                    color: #FFFFFF;
+                    left: 15px;
+                    top: 50%;
+                    position: absolute;
+                    transform: translateY(-50%);
+                    -webkit-transform: translateY(-50%);
+                }
+
+                input {
+                    color: #FFFFFF;
+                    height: 100%;
+                    box-shadow: none;
+                    width: 100%;
+                    font-size: 14px;
+                    padding-left: 40px;
+                    border: 1.5px solid #FFFFFF;
+                    background-color: transparent;
+                    &::placeholder {
+                        color: #DEDEDE;
+                    }
+                }
+                
+            }
+        }
+    }
+/* PAYMEMT ORDER MODAL */
+.payment-order-modal {
+    .modal-header {
+        border-bottom: 0;
+    }
+
+    .modal-body {
+        .content {
+            text-align: center;
+
+            i {
+                font-size: 5rem;
+                color: #218745;
+            }
+
+            p {
+                margin-top: 1rem;
+            }
+        }
+    }
+
+    .modal-footer {
+        border-top: 0;
+        justify-content: center;
+
+        button {
+            padding: 10px 40px;
+        }
+    }
+}
+
+    /* CONTACT SUPPORT DETAILS */
+    .contact-support-details {
+        padding: 25px 20px;
+        .support-details-wrapper {
+            padding: 20px;
+            background-color: #FFFFFF;
+
+            label {
+                font-size: 14px;
+            }
+            
+            .support-details-input {
+                height: 48px;
+                position: relative;
+                border-radius: 8px;
+
+                .icons {
+                    left: 15px;
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    -webkit-transform: translateY(-50%);
+                }
+
+                input {
+                    height: 100%;
+                    box-shadow: none;
+                    width: 100%;
+                    padding-left: 40px;
+                    border: 1.5px solid #C6C6C6;
+                }
+                .is-invalid{
+                    border-color: #dc3545;
+                }
+            }
+        }
+    }
+}
+
+
+/* TABLET VIEW MEDIA QUERY */
+@media only screen and (max-width: 768px) {
+    .contact-support-secction {
+        width: 100%;
+        box-shadow: none;
+    }
+}
+
+@media only screen and (max-width: 1024px) { 
+    .contact-support-secction {
+        width: 100%;
+        box-shadow: none;
+    }
+}
+
+
+/* MOBILE VIEW MEDIA QUERY */
+@media only screen and (max-width: 480px) {
+    .contact-support-secction {
+        width: 100%;
+        overflow-y: auto;
+    }
+}

@@ -1,0 +1,55 @@
+<section class="deactivated-account-section">
+    <!-- BACK TO PAGE -->
+    <div class="back-top-page">
+        <a routerLink="/Setting/EditProfile">
+            <img src="/assets/img/icons/back-arrow.svg" alt="arrow" />
+            <span>Deactivate Account</span>
+        </a>
+    </div>
+
+    <div class="edit-profile-status-wrapper">
+        <div class="user-details">
+            <h6>Mobile Number</h6>
+            <h3>+00 3426689992</h3>
+        </div>
+
+        <div class="edit-profile-form">
+            <div class="form-group mb-3">
+                <input type="password" name="password" class="form-control" placeholder="Enter password" required />  
+            </div>
+           
+            <div class="form-group mb-3">
+                <input type="password" name="reEnterPassword" class="form-control" placeholder="Re-enter password" required />  
+            </div>
+
+
+            <div class="form-group text-right">
+                <button type="button" class="btn btn-dark" (click)="showDialog()">Confirm Deactivation</button>
+            </div>
+           
+        </div>
+    </div>
+</section>
+
+<!-- PASSWORD RESET MODAL -->
+<div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" [ngStyle]="confirmDeactivationMD">
+    <div class="modal-dialog modal-dialog-centered modal-box" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirm Deactivation</h5>
+          <button type="button" class="btn btn-default close" data-dismiss="modal" aria-label="Close" (click)="closemd()">
+            <span aria-hidden="true"><i class="fa-solid fa-xmark"></i></span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="password-reset-content">
+            <p>All your data will be erased permanently. Are you sure?</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" (click)="closemd()">Cancel</button>
+          <button type="button" class="btn btn-danger">YES</button>
+        </div>
+      </div>
+    </div>
+  </div>

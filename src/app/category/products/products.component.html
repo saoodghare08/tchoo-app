@@ -1,0 +1,245 @@
+<section class="category-details-page {{selectedlanguage =='Arabic (عربي)' ? 'left-to-right':''}}">
+  <!-- PAGE HEADER -->
+  <div class="user-title">
+    <div class="title">
+      <div>
+        <h3>
+          <div style="display: flex;">
+            <a class="back-page ml-2" (click)="backNavigation()">
+              <i class="fa-solid fa-chevron-left"></i>
+            </a>
+            <h4>{{selectedlanguage =='Arabic (عربي)' ?
+              'تفاصيل المنتج':'Product Details'}}</h4>
+          </div>
+        </h3>
+      </div>
+      <div>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center">
+      <div class="card-status" *ngIf="createdBy !=0">
+        <a href="/MyCart/{{createdBy}}/{{HubId}}">
+          <span class="card-count">{{cartqty}}</span>
+          <img src="/assets/img/icons/shopping-cart.svg" alt="search">
+        </a>
+      </div>
+    </div>
+
+  </div>
+  <!-- CATEGORY DETAILS CARD -->
+  <div class="category-details-card">
+    <div class="added-wish-list mr-3">
+      <i *ngIf='product.isWishlisted == "false"' class='fa-regular fa-heart' style='font-size:18px'
+        (click)="addedWishlist(product)"></i>
+      <i *ngIf='product.isWishlisted == "true"' class='fa-solid fa-heart' style='font-size:18px ;color: red'
+        (click)="removeWishlist(product.wishlistId)"></i>
+    </div>
+    <div class="special-offer-badge" *ngIf="cartlist?.product?.offers?.length == 1">
+      <span>{{(((cartlist?.product?.manufracture-cartlist?.pricelist[0]?.sellingPrice)/cartlist?.product?.manufracture)*100)
+        | number : '1.0-0'}}% OFF</span>
+    </div>
+    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="categorySlide">
+      <div ngxSlickItem class="slide" *ngFor="let img of displayImagArray">
+        <div>
+          <div class="category-card-img">
+            <img [src]="img" alt="banner" width="100%"
+              onerror="this.onerror=null; this.src='assets/img/category/no-image.png'" (click)="openZoomImageMd(img)" />
+          </div>
+        </div>
+      </div>
+    </ngx-slick-carousel>
+  </div>
+  <!-- CATEGORY DETAILS VARIANTS -->
+  <form [formGroup]="productdetails" (ngSubmit)="addToCart()">
+    <div class="category-details-variants mt-3">
+      <div class="variants-content">
+        <div class="prduct-details">
+          <p *ngIf="isProductOutOfStock && cartlist?.pricelist?.length == 1" class="text-danger"
+            style="font-size: 12px; margin: 0;font-weight: 700;">
+            {{selectedlanguage=='Arabic (عربي)'?'إنتهى من المخزن':'Out Of Stock'}}
+          </p>
+          <p *ngIf="cartlist?.pricelist && (cartlist?.pricelist?.length != 0) && (cartlist?.pricelist[0]?.stockQty < 10 && cartlist?.pricelist[0]?.stockQty != 0 && cartlist?.pricelist?.length == 1)"
+            class="fw-bold" style="font-size: 12px;color: #797979; margin: 0;">
+            {{selectedlanguage=='Arabic (عربي)'?'مخزون محدود':'Limited Stock'}}
+          </p>
+          <div class="product-price">
+            <h4>{{product.pluName}}</h4>
+          </div>
+          <div class="product-des">
+            {{(proddescleng>firstCount)?(product.description |
+            slice:0:counter)+(showTxt=='Show More' ? '..' :
+            ''):(product.description)}}
+            <p class class="text-primary" *ngIf="(proddescleng>50)" (click)="toggleSkil($event)"
+              style="display: inline-block;">
+              <span *ngIf="(proddescleng>100)">{{showTxt}}</span>
+            </p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between product-prices-view" style="padding: 10px 0px;">
+            <div class="product-prices d-flex align-content-center">
+              <h3 class="m-0" *ngIf="qty==1">₹ {{ selectedPrice ? selectedPrice
+                : 0.00 | number :'1.2-2'}} </h3>
+              <h3 class="m-0" *ngIf="qty>1">₹ {{changePrice | number
+                :'1.2-2'}}</h3>
+              <!-- <h3 class="m-0" *ngIf="qty==1">
+                ₹ {{ selectedPrice ? selectedPrice : 0.00 | number :
+                '1.2-2'}}
+              </h3>
+              <h3 class="m-0" *ngIf="qty>1">
+                ₹ {{changePrice | number :'1.2-2'}}
+              </h3> -->
+
+              <h5 class="offer-amount" *ngIf="cartlist?.product?.offers?.length == 1">
+                ({{cartlist?.product?.manufracture}}
+                SR)</h5>
+              <div class="special-offer-badge" *ngIf="cartlist?.product?.offers?.length == 1">
+                {{(((cartlist?.product?.manufracture-cartlist?.pricelist[0]?.sellingPrice)/cartlist?.product?.manufracture)*100)
+                | number : '1.0-0'}}% OFF</div>
+            </div>
+            <div class="product-count">
+              <ng-container *ngFor="let variance of cartlist?.pricelist">
+                <div class="product-qty" *ngIf="!isProductOutOfStock && variance.priceId === selectedSize">
+                  <span class="minus" (click)="minus(variance)"><i class="fa-solid fa-minus"></i></span>
+                  <input type="number" class="count bg-transparent" min="0"
+                    oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : ''" id="qty"
+                    value={{qty?qty:1}} (keyup)="onInputUpdateqty($event.target,variance)" />
+                  <span class="plus" (click)="plus(variance)"><i class="fa-solid fa-plus"></i></span>
+                </div>
+              </ng-container>
+              <ng-container class="fw-bold" *ngIf="isProductOutOfStock && cartlist?.pricelist?.length > 1">
+                <p style="font-size: 12px; margin: 0;font-weight: 700;" class="text-danger">
+                  {{selectedlanguage=='Arabic (عربي)'?'إنتهى من المخزن':'Out Of Stock'}}</p>
+              </ng-container>
+            </div>
+          </div>
+          <div class="d-flex align-items-center justify-content-between" *ngIf="cartlist?.mappedVarient?.length > 1">
+            <div><span style="line-height: 3;"><span style="font-weight: 600;font-size: 16px;">MORE
+                  OPTIONS</span></span></div>
+            <div>
+              <ng-container *ngIf="selectedStockQty < 10 && ishubMap == 'false' && selectedStockQty != 0"
+                class="limited-stock"> </ng-container>
+            </div>
+          </div>
+          <div class="variants-product border-0" *ngIf="cartlist?.mappedVarient?.length > 1">
+            <div *ngFor="let v of cartlist?.mappedVarient; let i=index;" class="variants-item-wrapper">
+              <!-- [ngClass]="{ 'active': i == varianceindex }" -->
+              <a
+                [href]="'Main-Category/SubCategory/Category/Products/' + v.itemId + '/' + v.mainCategory + '/' + createdBy + '/' + HubId + '/asc/0/0'">
+                <div class="variants-item">
+                  <i class="fa-solid fa-circle-check active-check" *ngIf="v.ishubMap == 'true'"></i>
+                  <img src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/Product-image/{{v.itemId}}_0.png" onerror="this.onerror=null; this.src='assets/img/category/no-image.png'"
+                    alt="variants">
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="d-flex align-items-center justify-content-between" *ngIf="cartlist?.pricelist?.length > 1">
+            <div><span style="line-height: 3;"><span style="font-weight: 600;font-size: 16px;">Select
+                  {{product.item_MeasuredIn==="C" ?'Color':cartlist?.pricelist[0]?.measurement}}</span></span></div>
+            <div><ng-container *ngIf="selectedStockQty < 10 && ishubMap == 'false' && selectedStockQty != 0"
+                class="limited-stock">
+                <span style="font-weight:500;font-size: 12px;color: #ff6c00;margin-left: 12px;">
+                  {{selectedlanguage=='Arabic (عربي)'?'مخزون محدود':'Limited Stock'}}
+                  ({{selectedStockQty}} left)</span></ng-container></div>
+          </div>
+          <div class="variants-product" *ngIf="cartlist?.pricelist?.length > 1">
+            <div *ngFor="let v of cartlist?.pricelist; let i=index;" class="variants-item-wrapper" [ngClass]="{ 'active': i == varianceindex }">
+              <div class="variants-item circle" [ngStyle]="{ 'background-color': product.item_MeasuredIn == 'C' ? v.measurement : '' }" (click)="varientChange(v.sellingPrice, v.priceId, v.imagePath, i, v.ishubMap, v.price, 1, v.stockQty, v.size, 1 ,v.displayWithImg,v.imageCount )">
+                <i class="fa-solid fa-circle-check active-check" *ngIf="v.ishubMap == 'true'"></i>
+                <div class="variant-name" *ngIf="!v.displayWithImg">
+                  {{ v.size }} {{ (v.measurement =='NOVAR' || v.measurement == 'Ut') ? '' : v.measurement }}
+                </div>
+                <!-- <div class="variant-name" [ngStyle]="{ 'background-color': product.item_MeasuredIn == 'C' ? v.measurement : '' }" *ngIf="product.item_MeasuredIn == 'C'">
+                </div> -->
+                <img *ngIf="v.displayWithImg && v.measurement=== '#000000'" src="{{v.imagePath}}" onerror="this.onerror=null; this.src='assets/img/category/no-image.png'" alt="variants">
+              </div>
+              <span *ngIf="v.displayWithImg ">{{ v.size }}
+                 <!-- {{ (v.measurement =='NOVAR' || v.measurement == 'Ut') ? '' : v.measurement }} -->
+                </span>
+            </div>
+
+          </div>
+          <div class="border-0" *ngIf="cartlist.product?.productSpecs?.length > 1">
+            <h3 style="font-weight: 700;font-size: 16px;"> Product
+              Specification:</h3>
+            <div class="mt-3">
+              <table class="table" style="font-size: 14px;">
+                <tbody>
+                  <tr *ngFor="let item of cartlist.product?.productSpecs;">
+                    <td style="font-weight: 600;">{{ item.descType }}</td>
+                    <td>{{ item.descValue }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="border-0 mt-3">
+            <h3 style="font-weight: 700;font-size: 16px;">Product Description:</h3>
+            <div class="mt-3 responsive-iframe">
+             <iframe src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/UploadPdf/ITM03.pdf#toolbar=0" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+
+        </div>
+        <!-- MULTI PATTERN QTY WRAPPER -->
+        <div class="category-details-bttn">
+          <div class="bttn-status">
+            <button type="button" [ngClass]="{'disabled':isProductOutOfStock}" class="btn btn-dark" (click)="BuyNow()">
+              {{selectedlanguage =='Arabic (عربي)' ? 'اشتريالآن':'Buy Now'}}
+            </button>
+          </div>
+          <div class="bttn-status">
+            <button type="submit" [ngClass]="{'disabled':isProductOutOfStock}" *ngIf="ishubMap == 'false'"
+              class="btn btn-default" [ngStyle]="addtocart">
+              {{selectedlanguage =='Arabic (عربي)' ?'إضافة إلى السلة':'Add to Bag'}}
+            </button>
+            <div *ngFor="let cart of mycart">
+              <a href="/MyCart/{{createdBy}}/{{HubId}}" *ngIf="ishubMap == 'true' && cart.pattern == selectedSize"
+                class="btn btn-default w-100">
+                {{selectedlanguage =='Arabic (عربي)'?'اذهب إلى عربة التسوق':'Go to cart'}}
+                <i class="fa-solid fa-circle-check"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <!-- CATEGORY DETAILS VARIANTS ENDED -->
+  <app-relatedproducts [itemid]="itemid"></app-relatedproducts>
+  <!-- RELATED PRODUCT VIEW ENDED -->
+  <!-- PAGE COMMON WRAPPER -->
+  <app-recentlyviewed></app-recentlyviewed>
+</section>
+<!-- BOTTOM LAYOUT -->
+<!-- <app-bottom-layout></app-bottom-layout> -->
+
+<!-- PRODUCT ZOOM MODAL -->
+<div class="zoom-image-modal" [ngClass]="{'open-modal-patch': zoomImageModal}">
+  <div class="zoom-image-header">
+    <a (click)="closeZoomImageModal()">
+      <i class="fa-solid fa-xmark"></i>
+    </a>
+  </div>
+  <div class="zoom-image-body">
+    <div class="product-image">
+      <pinch-zoom style="height: 100%;" [double-tap]='true' [wheel]="false" [zoomControlScale]="2">
+        <img src="{{displayMainImg}}" alt="banner" />
+      </pinch-zoom>
+    </div>
+  </div>
+  <div class="zoom-image-footer" *ngIf="displayImagArray?.length > 1">
+    <div class="variants-product border-0">
+      <div *ngFor="let img of displayImagArray; let i=index;" class="variants-item-wrapper">
+        <!-- <a [href]="'Main-Category/SubCategory/Category/Products/' + v.itemId + '/' + v.mainCategory + '/' + createdBy + '/' + HubId + '/asc/0/0'"> -->
+          <div class="variants-item" (click)="openZoomImageMd(img)">
+            <!-- <i class="fa-solid fa-circle-check active-check" *ngIf="v.ishubMap == 'true'"></i> -->
+            <img src="{{img}}" onerror="this.onerror=null; this.src='assets/img/category/no-image.png'" alt="variants" />
+          </div>
+        <!-- </a> -->
+      </div>
+    </div>
+  </div>
+</div>

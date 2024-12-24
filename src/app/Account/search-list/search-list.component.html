@@ -1,0 +1,57 @@
+<section class="category-page {{selectedlanguage =='Arabic (عربي)' ? 'left-to-right':''}}">
+  <!-- USER TITLE -->
+  <div class="user-title">
+    <div class="d-flex align-items-center justify-content-between">
+      <div class="title">
+        <h3>
+          <a (click)="navigateByUrl()" class="back-page"><img src="/assets/img/icons/back-arrow.svg" alt="arrow"><span> {{searchvalue}} </span></a>
+        </h3>
+      </div>
+      <div class="card-status" *ngIf="createdBy!=0">
+        <a href="/MyCart/{{createdBy}}/{{HubId}}">
+          <span class="card-count">{{ mycart?.length }}</span>
+          <img src="/assets/img/icons/shopping-cart.svg" alt="search" />
+        </a>
+      </div>
+    </div>
+    <!-- COMMON SEARCH BOX -->
+    <div class="common-search-box">
+      <div class="common-search-input">
+        <form (ngSubmit)="GetProductsByName()">
+          <img src="/assets/img/icons/search.png" class="search-icon" alt="search" />
+          <input type="text" placeholder="Search" name="searchValue" id="searchValue" [(ngModel)]="value" />
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- PAGE COMMON WRAPPER -->
+  <div class="page-common-wrapper">
+    <div class="page-common-header">
+      <h2>Showing {{getItems.length}} results for "{{searchvalue}}"</h2>
+    </div>
+    <div class="no-more-product" *ngIf="getItems.length == 0">No more Products</div>
+    <div class="category-list-wrapper">
+      <div class="container-fluid">
+        <div class="row">
+          <a class="col-6" *ngFor="let itm of getItems;let i=index"
+          href="/Main-Category/SubCategory/Category/Products/{{itm.itemId}}/{{itm.mainCategory}}/{{createdBy}}/{{HubId}}/asc/0/0">
+            <div class="category-card card">
+              <div class="offer-tag" *ngIf="itm.offers?.length == 1">{{(((itm.manufracture-itm.sellingPrice)/itm.manufracture)*100) | number : '1.0-0'}}% OFF</div>
+              <div class="top card-body">
+                <img src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/Product-image/{{itm.itemId}}_0.png" alt="variants" />
+              </div>
+              <div class="bottom card-content">
+                <h3>{{ itm.pluName }}</h3>
+                <h6>₹ {{itm.sellingPrice}} <span class="offer-amount" *ngIf="itm.offers?.length == 1">{{itm.manufracture}}</span></h6>
+                <p *ngIf="itm.stockQty == 0 && itm.relation==1" class="text-danger fw-bold">
+                  {{selectedlanguage=='Arabic (عربي)'?'إنتهى من المخزن':'Out Of Stock'}}
+                </p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- BOTTOM LAYOUT -->

@@ -1,0 +1,55 @@
+.deactivated-account-section {
+    padding-bottom: 50px;
+    height: 100%;
+
+    .edit-profile-status-wrapper {
+        padding: 20px;
+        .user-details {
+            margin-bottom: 20px;
+            h6 {
+                color: #444444;
+                font-size: 12px;
+                line-height: 21px;
+            }
+            h3 {
+                color: #000000;
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 27px;
+            }
+        }
+
+        .edit-profile-form {
+            .form-group {
+                .btn {
+                    font-size: 12px;
+                    padding: 0 25px;
+                }
+            }
+        }
+
+    }
+}
+
+/* TABLET VIEW MEDIA QUERY */
+@media only screen and (max-width: 768px) {
+    .deactivated-account-section {
+        width: 100%;
+        box-shadow: none;
+    }
+}
+
+@media only screen and (max-width: 1024px) { 
+    .deactivated-account-section {
+        width: 100%;
+        box-shadow: none;
+    }
+}
+
+/* MOBILE VIEW MEDIA QUERY */
+@media only screen and (max-width: 480px) {
+    .deactivated-account-section {
+        width: 100%;
+        box-shadow: none
+    }
+}

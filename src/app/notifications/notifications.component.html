@@ -1,0 +1,45 @@
+<section class="notifications-section ">
+    <!--  NOTIFICATIONS STATUS BTTN -->
+    <div *ngIf="!pushNotificationView">
+        <div class="notification-status-bttn mb-3 ">
+            <a href="javascript:void(0)" class="active">All</a>
+            <!-- <a href="javascript:void(0)"><i class="fa-solid fa-basket-shopping"></i> <span>Order info</span></a>
+            <a href="javascript:void(0)"><i class="fa-solid fa-percent"></i> <span>Offers</span></a> -->
+        </div>
+        <!-- ORDER STATUS COMPONENT BEGIN -->
+        <div>
+            <div class="notification-list-wrapper">
+                <div class="notification-list" *ngFor="let n of notificationList">
+                    <div class="left">
+                        <span class="icons"><i class="fa-solid fa-basket-shopping"></i></span>
+                    </div>
+                    <div class="center">
+                        <h3>{{n.notification_Title}} !</h3>
+                        <p>{{n.notification_Desc}}</p>
+                        <h4 *ngIf="n.duration && n.duration !== '0'">({{n.duration}} day ago)</h4>
+                        <h4 *ngIf="n.duration === '0'">(Today)</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ORDER STATUS COMPONENT ENDED -->
+    <!-- PUSH NOTIFICATION COMPONENT BEGIN -->
+    <div *ngIf="pushNotificationView">
+        <app-push-notification></app-push-notification>
+    </div>
+    <!-- PUSH NOTIFICATION COMPONENT ENDED -->
+    <!-- PAGE EMPTY STATE -->
+    <div class="page-empty-state d-none" *ngIf="notificationList?.length==0">
+        <div class="empty-img auto-empty-img">
+            <img src="/assets/img/empty-state/notification.png" alt="notification" />
+        </div>
+        <div class="empty-state-content">
+            <h2>No notifications yet</h2>
+            <p>It's quiet here. no new notifications at this moment.</p>
+            <a href="javascript:void(0)" href="/Home/{{createdby}}">Continue Shopping</a>
+        </div>
+    </div>
+</section>
+<!-- BOTTOM LAYOUT -->
+<!-- <app-bottom-layout></app-bottom-layout> -->

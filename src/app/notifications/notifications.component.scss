@@ -1,0 +1,184 @@
+.notifications-section {
+    padding-bottom: 100px;
+    height: 100%;
+    overflow-y: auto;
+
+    .user-title {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        top: 0;
+        position: sticky;
+        justify-content: space-between;
+        background-color: #FFFFFF;
+
+        .title {
+            display: flex;
+            align-items: flex-end;
+
+
+            h3 {
+
+                color: #000000;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 28px;
+
+                .back-page {
+                    color: #2e2c2c;
+                    cursor: pointer;
+                    display: inline-block;
+                    display: flex;
+                    align-items: center;
+
+
+                    img {
+                        width: 10px;
+                        margin-bottom: 2px;
+                    }
+
+                    span {
+                        display: block;
+                        line-height: normal;
+                        margin-left: 10px;
+                    }
+                }
+
+
+            }
+
+        }
+
+        .setting-icon {
+            color: #222222;
+            display: block;
+            cursor: pointer;
+
+            i {
+                font-size: 22px;
+            }
+        }
+    }
+
+
+    /* NOTIFICATION STATUS BTTN */
+    .notification-status-bttn {
+        background-color: #FFFFFF;
+        margin: 10px 0;
+        padding: 10px 20px 5px 20px;
+        background-color: #FFFFFF;
+        border-top: 1px solid #f1f1f1;
+
+        a {
+            color: #999999;
+            padding: 8px 20px;
+            font-size: 14px;
+            border-radius: 25px;
+            margin-right: 12px;
+            display: inline-block;
+            border: 1px solid #999999;
+
+            &.active {
+                color: #2472CD;
+                background: rgba(36, 114, 205, 0.1);
+                border-color: #2472CD;
+            }
+
+            i {
+                margin-right: 5px;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+
+    /* NOTIFICATION LIST WRAPPER */
+    .notification-list-wrapper {
+        .notification-list {
+            display: flex;
+            padding: 20px;
+            position: relative;
+            margin-bottom: 20px;
+            background-color: #FFFFFF;
+            &:last-child {
+              margin-bottom: 0;
+            }
+
+            .left {
+                flex: 10% 0;
+                position: relative;
+
+                .icons {
+                    position: absolute;
+                    top: 0;
+                }
+            }
+
+            .center {
+                flex: 70% 0;
+
+                h3 {
+                    color: #000000;
+                    font-size: 16px;
+                    font-weight: 500;
+                    margin-bottom: 10px;
+                }
+
+                p {
+                    color: #222222;
+                    font-size: 12px;
+                    margin-bottom: 10px;
+                }
+
+                h4 {
+                    color: #5F5F5F;
+                    font-size: 12px;
+                }
+            }
+
+            .right {
+                flex: 20% 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .img {
+                    width: 50px;
+                    height: 50px;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* TABLET VIEW MEDIA QUERY */
+@media only screen and (max-width: 768px) {
+    .notifications-section {
+        width: 100%;
+        box-shadow: none;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .notifications-section {
+        width: 100%;
+        box-shadow: none;
+    }
+}
+
+
+/* MOBILE VIEW MEDIA QUERY */
+@media only screen and (max-width: 480px) {
+    .notifications-section {
+        width: 100%;
+        box-shadow: none
+    }
+}

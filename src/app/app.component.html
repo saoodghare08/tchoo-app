@@ -1,0 +1,15 @@
+<router-outlet></router-outlet>
+<div class="common-loader-wrapper" *ngIf="commonLoader==true">
+  <div class="common-loader">
+    <div class="sns-logo">
+      <img src="/assets/img/LOGO.gif" alt="logo" />
+    </div>
+    <!-- <img class="gif-loader" src="/assets/img/common-loader.gif" alt="gif">
+    <span>Loading...</span> -->
+  </div>
+</div>
+<div class="page-loader-wrapper" *ngIf="pageLoader==true">
+  <div class="page-loader">
+    <img class="gif-loader" src="/assets/img/page-loader.gif" alt="gif">
+  </div>
+</div>

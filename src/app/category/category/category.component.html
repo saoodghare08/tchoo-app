@@ -1,0 +1,152 @@
+<section class="category-view-page">
+  <div class="user-title">
+    <div class="d-flex align-items-center justify-content-between">
+      <div class="title">
+        <div>
+          <h3>
+            <a class="back-page" (click)="backNavigation()"> <img src="/assets/img/icons/back-arrow.svg" alt="arrow">
+              <span>Search Product</span>
+            </a>
+          </h3>
+        </div>
+      </div>
+      <div class="card-status">
+        <a href="/MyCart/{{createdBy}}">
+          <span class="card-count">{{mycart?.length}}</span>
+          <img src="/assets/img/icons/shopping-cart.svg" alt="search" />
+        </a>
+      </div>
+    </div>
+
+    <!-- COMMON SEARCH BOX -->
+    <div class="common-search-box">
+      <div class="common-search-input">
+        <form (ngSubmit)="search()">
+          <img src="/assets/img/icons/search.png" class="search-icon" alt="search" />
+          <input type="text" placeholder="Search Product" name="searchValue" id="searchValue"
+            [(ngModel)]="searchValue" />
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- PAGE COMMON WRAPPER -->
+  <div class="page-common-wrapper">
+    <div class="page-common-header">
+      <div>
+        <span>{{this.mainCategoryName}}</span>
+      </div>
+      <div class="category-view-status">
+        <a href="javascript:void(0)" (click)="productFilter()">
+          <span>Filter</span>
+          <img src="/assets/img/icons/filter.png" alt="filter" />
+        </a>
+        <a href="javascript:void(0)" (click)="productSort()">
+          <span>Sort</span>
+          <img src="/assets/img/icons/sort.png" alt="sort" />
+        </a>
+        <a href="javascript:void(0)">
+          <img src="/assets/img/icons/grid.png" alt="grid" />
+        </a>
+      </div>
+    </div>
+
+    <div class="category-list-wrapper">
+      <div class="container-fluid">
+        <div class="row" *ngIf="!getItems.undefined && getItems.length != 0; else elseStatement">
+          <div class="col-md-4 col-6 col-lg-2" *ngFor="let item of getItems">
+            <div class="common-card card">
+              <div class="top card-body">
+                <img src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/category-images/{{item.categoryId}}_0.png"
+                  onerror="this.onerror=null; this.src='assets/img/category/no-image.png'" alt="category" />
+              </div>
+              <div class="bottom card-content">
+                <h3 class="text-center">{{item.name}}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #elseStatement>
+      <div class="page-empty-state" *ngIf="getItems.length == 0">
+        <div class="empty-img">
+          <img src="/assets/img/empty-state/empty-state.png" alt="empty" />
+        </div>
+        <div class="empty-state-content">
+          <p>No more Products</p>
+          <a href="javascript:void(0)">Start shopping</a>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+  <!-- PAGE EMPTY STATE -->
+  <div class="page-empty-state" *ngIf="getItems.length == 0">
+    <div class="empty-img">
+      <img src="/assets/img/empty-state/empty-state.png" alt="empty" />
+    </div>
+
+    <div class="empty-state-content">
+      <p>No more Products</p>
+      <a href="javascript:void(0)">Start shopping</a>
+    </div>
+  </div>
+</section>
+<!-- FILTER BY PRODUCT MODAL -->
+<div class="modal fade show change_password_md" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  [ngStyle]="prductFilerView">
+  <div class="modal-dialog modal-dialog-centered modal-box" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Filter</h5>
+        <button type="button" class="btn btn-default close" data-dismiss="modal" aria-label="Close" (click)="closemd()">
+          <span aria-hidden="true"><i class="fa-solid fa-xmark"></i></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="category-filter-wrapper">
+          <div class="common-check-box">
+            <input type="checkbox" id="all" name="all" />
+            <label for="all">All</label>
+          </div>
+          <div class="common-check-box" *ngFor="let cat of filterCategories">
+            <input type="checkbox" id="{{cat.name}}" name="{{cat.name}}" />
+            <label for="{{cat.name}}">{{cat.name}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="closemd()">Cancel</button>
+        <button type="button" class="btn btn-outline-dark">View Items</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SORT BY PRODUCT MODAL -->
+<div class="modal fade show change_password_md" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  [ngStyle]="prductSortView">
+  <div class="modal-dialog modal-dialog-centered modal-box" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sort By</h5>
+        <button type="button" class="btn btn-default close" data-dismiss="modal" aria-label="Close" (click)="closemd()">
+          <span aria-hidden="true"><i class="fa-solid fa-xmark"></i></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="category-filter-wrapper">
+          <div class="common-radio-bttn" *ngFor="let cat of sortCategory">
+            <input type="radio" id="{{cat.name}}" name="sortBy" />
+            <label for="{{cat.name}}">{{cat.name}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="closemd()">Cancel</button>
+        <button type="button" class="btn btn-outline-dark">View Items</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- BOTTOM LAYOUT -->
+<!-- <app-bottom-layout></app-bottom-layout> -->

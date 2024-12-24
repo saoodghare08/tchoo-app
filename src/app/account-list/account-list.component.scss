@@ -1,0 +1,133 @@
+.account-list-section {
+    padding-bottom: 70px;
+    width: 480px;
+    margin: 0 auto;
+    box-shadow: 0 10px 20px rgb(167 167 167 / 19%), 0 6px 6px rgb(131 131 131 / 23%);
+
+    /* ACCOUNT LIST HEADER */
+    .account-list-header {
+        display: flex;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        padding: 10px 20px;
+        background-color: #ffffff;
+        justify-content: space-between;
+        box-shadow: rgb(149 157 165 / 20%) 1px 8px 24px;
+
+        .content {
+            h4 {
+                color: #767575;
+                font-size: 14px;
+                margin-bottom: 5px;
+            }
+
+            h5 {
+                color: #000000;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 28px;
+            }
+        }
+
+        .card-status {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #E8E8E8;
+
+            .card-count {
+                color: #ffffff;
+                width: 25px;
+                height: 25px;
+                font-size: 12px;
+                font-weight: 500;
+                border-radius: 50%;
+                background-color: #222222;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                right: -5px;
+                top: 6px;
+            }
+        }
+    }
+
+    /* ACCOUNT LIST BODY */
+    .account-list-body {
+        padding: 20px;
+
+        h3 {
+            color: #444444;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+
+            li {
+                display: block;
+                border-bottom: 1px solid #E1E1E1;
+
+                &:last-child {
+                    border-bottom: 0;
+
+                    a {
+                        padding-bottom: 0;
+                    }
+                }
+
+                a {
+                    color: #444444;
+                    font-size: 16px;
+                    padding: 20px 0;
+                    display: inline-block;
+                    text-decoration: none;
+
+                    i {
+                        margin-right: 12px;
+                        font-size: 18px;
+                    }
+
+                    i,
+                    span {
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+
+/* TABLET VIEW MEDIA QUERY */
+@media only screen and (max-width: 768px) {
+    .account-list-section {
+        width: 100%;
+        box-shadow: none;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .account-list-section {
+        width: 100%;
+        box-shadow: none;
+    }
+}
+
+
+/* MOBILE VIEW MEDIA QUERY */
+@media only screen and (max-width: 480px) {
+    .account-list-section {
+        width: 100%;
+        box-shadow: none
+    }
+}

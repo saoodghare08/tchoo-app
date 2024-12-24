@@ -1,0 +1,157 @@
+.edit-profile-section {
+    height: 100%;
+
+    .edit-profile-form {
+        padding: 20px 20px 50px 20px;
+
+        .form-group {
+            position: relative;
+
+            .label {
+                font-weight: 600;
+                margin: 5px 0;
+                color: #6f6969;
+            }
+
+            .update {
+                color: #036CCC;
+                position: absolute;
+                right: 1rem;
+                top: 50%;
+                font-size: 12px;
+                font-weight: 500;
+                transform: translateY(-50%);
+                -webkit-transform: translateY(-50%);
+            }
+
+            .btn {
+                padding: 0 30px;
+            }
+        }
+
+
+        ul {
+            margin-top: 40px;
+
+            li {
+                display: block;
+                padding: 10px 0;
+                border-top: 1px dashed #E1E1E1;
+
+                a {
+                    font-size: 14px;
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .edit-profile-bttn {
+            position: fixed;
+            bottom: 0;
+            padding: 10px;
+            left: 0;
+            right: 0;
+        }
+    }
+
+ 
+}
+
+/* PAYMEMT ORDER MODAL */
+.payment-order-modal {
+    .modal-header {
+        border-bottom: 0;
+    }
+
+    .modal-body {
+        .content {
+            text-align: center;
+
+            i {
+                font-size: 5rem;
+                color: #218745;
+            }
+
+            p {
+                margin-top: 1rem;
+            }
+        }
+    }
+
+    .modal-footer {
+        border-top: 0;
+        justify-content: center;
+
+        button {
+            padding: 10px 40px;
+        }
+    }
+}
+
+/* PAYMEMT ORDER MODAL */
+.validate-contact-modal {
+    .modal-header-content {
+        padding: 12px 20px;
+        border-bottom: 0;
+        display: flex;
+
+        .modal-subtitle {
+            font-size: 11px;
+            line-height: 1.5;
+            width: 90%;
+        }
+
+        img {
+            width: 14px;
+        }
+    }
+
+    .modal-body {
+        .content {
+            text-align: center;
+
+            i {
+                font-size: 5rem;
+                color: #218745;
+            }
+
+            p {
+                margin-top: 1rem;
+            }
+        }
+
+    }
+
+    .modal-footer {
+        border-top: 0;
+        justify-content: center;
+
+        button {
+            padding: 10px 40px;
+        }
+    }
+}
+
+
+/* TABLET VIEW MEDIA QUERY */
+@media only screen and (max-width: 768px) {
+    .edit-profile-section {
+        width: 100%;
+        box-shadow: none;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .edit-profile-section {
+        width: 100%;
+        box-shadow: none;
+    }
+}
+
+/* MOBILE VIEW MEDIA QUERY */
+@media only screen and (max-width: 480px) {
+    .edit-profile-section {
+        width: 100%;
+        box-shadow: none
+    }
+}

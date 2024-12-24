@@ -1,0 +1,12 @@
+<section class="select-language-section {{selectedlanguage=='Arabic (عربي)' ? 'left-to-right':''}}">
+    <div class="language-select">
+        <div class="form-group">
+            <label>{{selectedlanguage=='Arabic (عربي)' ? 'اختر اللغة':'Choose Language'}}</label>
+            <select class="form-control">
+                <option disabled> {{selectedlanguage=='Arabic (عربي)' ? 'اختر لغتك':'Select your language'}}</option>
+                <option value="1" selected>{{selectedlanguage=='Arabic (عربي)' ? 'إنجليزي':'English'}}</option>
+                <option value="2">{{selectedlanguage=='Arabic (عربي)' ? 'عربي':'Arabic'}}</option>
+            </select>
+        </div>
+    </div>
+</section>

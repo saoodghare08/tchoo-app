@@ -1,0 +1,265 @@
+<section class="category-view-page {{selectedlanguage =='Arabic (عربي)' ? 'left-to-right':''}}"
+  [ngClass]="{'modal-patch': modalPatch }">
+  <!-- USER TITLE -->
+  <!-- PAGE HEADER -->
+  <div class="user-title">
+    <div class="d-flex align-items-center justify-content-between">
+      <div class="title">
+        <div>
+          <h3>
+            <a class="back-page" (click)="backNavigation()"> <img src="/assets/img/icons/back-arrow.svg" alt="arrow">
+              <span>{{this.mainCatName}}</span>
+            </a>
+          </h3>
+        </div>
+      </div>
+      <div class="card-status" *ngIf="createdBy != 0">
+        <a href="/MyCart/{{ createdBy }}/{{HubId}}">
+          <span class="card-count">{{mycart?.length}}</span>
+          <img src="/assets/img/icons/shopping-cart.svg" alt="search" />
+        </a>
+      </div>
+    </div>
+    <!-- COMMON SEARCH BOX -->
+    <div class="common-search-box">
+      <div class="common-search-input">
+        <form (ngSubmit)="search()">
+          <img src="/assets/img/icons/search.png" class="search-icon" alt="search" />
+          <input type="text" placeholder="Search" name="searchValue" id="searchValue" [(ngModel)]="searchValue" />
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- PAGE COMMON WRAPPER -->
+  <div class="page-common-wrapper">
+    <div class="page-common-header">
+      <div>
+      </div>
+      <div class="category-view-status">
+        <a href="javascript:void(0)" (click)="productFilter()">
+          <span>Filter</span>
+          <img src="/assets/img/icons/filter.png" alt="filter" />
+        </a>
+        <a href="javascript:void(0)" (click)="productSort()">
+          <span>Sort</span>
+          <img src="/assets/img/icons/sort.png" alt="sort" />
+        </a>
+      </div>
+    </div>
+    <ng-template #elseStatement>
+      <div class="page-empty-state" style="top:60%;">
+        <div class="empty-img">
+          <img src="/assets/img/empty-state/empty-state.png" alt="empty" />
+        </div>
+        <div class="empty-state-content">
+          <h2>{{selectedlanguage =='Arabic (عربي)' ?'لا يوجد منتج':'There is no product'}}</h2>
+        </div>
+      </div>
+    </ng-template>
+    <div class="category-list-wrapper">
+      <!-- COMMON CUSTOM SLIDER -->
+      <div class="common-custom-slider without-scroll row"
+        *ngIf="!getItems.undefined && getItems.length != 0; else elseStatement">
+        <div class="col-md-4 col-6 col-lg-2" *ngFor="let item of getItems;let i=index">
+          <div class="common-card-box">
+            <div class="special-offer-badge" *ngIf="item.offers?.length == 1">
+              <span>{{(((item.manufracture-item.sellingPrice)/item.manufracture)*100) | number : '1.0-0'}}% OFF</span>
+            </div>
+            <!-- <div class="badge badge-lg badge-accented orange" *ngIf="item.offers?.length == 1">{{(((item.manufracture-item.sellingPrice)/item.manufracture)*100) | number : '1.0-0'}}% OFF</div> -->
+            <!-- <a class="added-wish-list {{item.isWishlisted}}" href="javascript:void(0)">
+              <i *ngIf='item.isWishlisted == "false"' class='fa-regular fa-heart' style='font-size:20px'
+                (click)="addedWishlist(item)"></i>
+              <i *ngIf='item.isWishlisted == "true"' class='fa-solid fa-heart' style='font-size:20px ;color: red'
+                (click)="removeWishlist(item.wishlistId)"></i>
+            </a> -->
+            <div class="top-img">
+              <div class="card-img" (click)="producdetailspage(item.itemId)">
+                <!-- <img src="{{item.imagePath}}" alt="category"
+                  onerror="this.onerror=null; this.src='assets/img/category/no-image.png'" /> -->
+                  <img [src]="'https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/Product-image/' + item.itemId + '_0.png'"
+                  onerror="this.onerror=null; this.src='assets/img/category/no-image.png'"  alt="product1">
+              </div>
+            </div>
+            <div class="card-bottom">
+              <div class="card-content">
+                <div>
+                  <h3>{{item.pluName}}</h3>
+                  <p> {{item.sellingPrice}} <span class="offer-amount"
+                      *ngIf="item.offers?.length == 1">{{item.manufracture}}</span></p>
+                      <!-- <p>₹ {{item.sellingPrice}} <span class="offer-amount"
+                        *ngIf="item.offers?.length == 1">{{item.manufracture}}</span></p> -->
+                </div>
+                <div class="add-cart">
+                  <button type="button" *ngIf="item.isInCart == 'false' && (item.relation != 1 || item.stockQty!=0)"
+                    (click)="addToCart(item)" class="add-cart-bttn">
+                    {{selectedlanguage =='Arabic (عربي)'?'أضف إلى السلة':'Add to Bag  '}}
+                  </button>
+                  <p *ngIf="item.stockQty == 0 && item.relation==1" class="text-danger">
+                    {{selectedlanguage=='Arabic (عربي)'?'إنتهى من المخزن':'Out Of Stock'}}
+                  </p>
+                  <button type="button" *ngIf="item.isInCart == 'true' && item.relation != 1" (click)="addToCart(item)"
+                    class="add-cart-bttn added-bttn">
+                    {{selectedlanguage =='Arabic (عربي)'?'مضاف':'Added'}}
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                </div>
+                <div class="add-cart-box">
+                  <div *ngIf="item.isInCart == 'true' && item.relation == 1 && item.stockQty !=0">
+                    <div *ngFor="let cart of mycart">
+                      <div *ngIf="item.itemId == cart.itemId" class="product-qty mb-0">
+                        <span (click)="handleMinus(cart)" class="minus"><i class="fa-solid fa-minus"></i></span>
+                        <input type="number" class="count" id="{{cart.id + '_productId'}}"
+                          value="{{cart.quantity?cart.quantity:1}}" (keyup)="Updatequantity(cart,$event.target)" min="0"
+                          oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : ''" />
+                        <span (click)="handlePlus(cart)" class="plus"><i class="fa-solid fa-plus"></i></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- SELECT VARIANT MODAL -->
+  <div class="select-variant" [ngClass]="{ 'product-variant': variantView }">
+    <div class="variant-header">
+      <h2>{{selectedlanguage =='Arabic (عربي)' ?'اختر واحدة':'Choose One'}}</h2>
+      <a (click)="closeVariant()"><i class="fa-solid fa-xmark"></i></a>
+    </div>
+    <div class="variant-body">
+      <div class="variant-product">
+        <div class="img">
+          <img src="{{displayImg}}" alt="product" />
+        </div>
+        <div>
+          <h5>{{ itemName }}</h5>
+          <h4>₹ {{ selectedPrice }}</h4>
+        </div>
+      </div>
+      <!-- <div class="variants-details">
+        <h2>{{selectedlanguage =='Arabic (عربي)' ?'المتغيرات:':'Variants:'}}</h2>
+        <div class="variants-details-wrapper">
+          <div class="variants-card" *ngFor="let v of cartlist?.pricelist;let i=index;">
+            <div class="variants-card-img-wrapper">
+              <div class="variants-card-img" (click)="varientChange(v.sellingPrice, v.priceId,i, v.itemId,v.stockQty)"
+                [ngClass]="{ 'active':i == varianceindex}">
+                <i class="fa-solid fa-circle-check active-check" *ngIf="v.ishubMap == 'true'"></i>
+                <img src="{{v.imagePath}}" alt="variant" />
+              </div>
+              <h3>{{ v.size }}</h3>
+            </div>
+            <div class="continue-bttn">
+              <div class="continue-bttn-divide">
+                <a class="btn btn-dark" (click)="continueProduct()"
+                  *ngIf="v.ishubMap == 'false' && v.priceId == selectedSize && !isProductOutOfStock">{{selectedlanguage
+                  =='Arabic (عربي)'
+                  ?'استمر':'Add to Bag'}}</a>
+                <div *ngFor="let cart of mycart">
+                  <div class="product-qty"
+                    *ngIf="v.ishubMap == 'true' && cart.pattern == selectedSize && !isProductOutOfStock">
+                    <span class="minus" (click)="handleMinus(cart)"><i class="fa-solid fa-minus"></i></span>
+                    <input type="number" class="count" id="{{cart.id + '_productId'}}" min="0"
+                      oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : ''"
+                      [(ngModel)]="cart.quantity==null?1:cart.quantity" (keyup)="Updatequantity(cart,$event.target)" />
+                    <span class="plus" (click)="handlePlus(cart)"><i class="fa-solid fa-plus"></i></span>
+                  </div>
+                </div>
+                <p *ngIf="isProductOutOfStock" class="text-danger">
+                  {{selectedlanguage=='Arabic (عربي)'?'إنتهى من المخزن':'Out Of Stock'}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <div class="variants-details">
+        <h2>{{selectedlanguage =='Arabic (عربي)' ?'المتغيرات:':'Variants:'}}</h2>
+        <div class="variants-details-wrapper">
+          <div class="variants-card" *ngFor="let v of cartlist?.pricelist;let i=index;">
+            <div class="variants-item circle" (click)="varientChange(v.sellingPrice, v.priceId,i, v.itemId,v.stockQty)" [ngClass]="{ active: v.sellingPrice == selectedPrice }">
+              <i class="fa-solid fa-circle-check active-check" *ngIf="v.ishubMap == 'true'"></i>
+              <div class="variant-name"  *ngIf="!v.displayWithImg">{{ v.size }} {{ (v.measurement =='NOVAR' || 'Ut') ? '' : v.measurement }}
+              </div>
+              <img  *ngIf="v.displayWithImg" src="{{v.imagePath}}" onerror="this.onerror=null; this.src='assets/img/category/no-image.png'"
+                  alt="variants">
+            </div>
+            <h3>{{ v.size }}</h3>
+            <div class="continue-bttn">
+              <div class="continue-bttn-divide">
+                <button type="button" class="btn btn-dark w-100" (click)="continueProduct()"
+                  *ngIf="v.ishubMap == 'false' && v.priceId == selectedSize  && !isProductOutOfStock">{{selectedlanguage =='Arabic (عربي)'
+                  ?'أضف إلى السلة':'Add to Bag'}}</button>
+                <div *ngFor="let cart of mycart">
+                  <div class="product-qty" *ngIf="v.ishubMap == 'true' && cart.pattern == selectedSize  && !isProductOutOfStock">
+                    <span class="minus" (click)="handleMinus(cart)"><i class="fa-solid fa-minus"></i></span>
+                    <input type="number" class="count" id="{{cart.id + '_productId'}}" value="{{cart.quantity?cart.quantity:1}}"  (keyup)="onInputUpdateqty(cart,$event.target)" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : ''"/>
+                    <span class="plus" (click)="handlePlus(cart)"><i class="fa-solid fa-plus"></i></span>
+                  </div>
+                </div>
+                  <p *ngIf="isProductOutOfStock" class="text-danger">
+                    {{selectedlanguage=='Arabic (عربي)'?'إنتهى من المخزن':'Out Of Stock'}}
+                  </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- FILTER BY PRODUCT MODAL -->
+<div class="modal fade show change_password_md" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  [ngStyle]="prductFilerView">
+  <div class="modal-dialog modal-dialog-centered modal-box" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Filter</h5>
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal" aria-label="Close"
+          (click)="closemd()">Reset
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="category-filter-wrapper">
+          <div class="common-check-box" *ngFor="let cat of filterCategories">
+            <input type="checkbox" id="{{cat.categoryId}}" name="{{cat.name}}" [(ngModel)]="cat.isChecked"
+              (change)="AddCatIds(cat.categoryId)" checked />
+            <label for="{{cat.categoryId}}">{{cat.name}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="SortProducts()">Apply</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- SORT BY PRODUCT MODAL -->
+<div class="modal fade show change_password_md" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  [ngStyle]="prductSortView">
+  <div class="modal-dialog modal-dialog-centered modal-box" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sort By</h5>
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal" aria-label="Close"
+          (click)="closemdsort()">Reset
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="category-filter-wrapper">
+          <div class="common-radio-bttn" *ngFor="let cat of sortCategory">
+            <input type="radio" id="{{cat.SortId}}" value="{{cat.name}}" name="sortby" (click)="setradio(cat.SortId)" />
+            <label for="{{cat.SortId}}">{{cat.name}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="SortProducts()">Apply</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- BOTTOM LAYOUT -->
+<!-- <app-bottom-layout></app-bottom-layout> -->

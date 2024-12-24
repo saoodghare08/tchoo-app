@@ -1,0 +1,564 @@
+<div class="notification-tabs {{selectedlanguage =='Arabic (عربي)' ? 'left-to-right':''}}">
+    <div class="tab-slider--nav">
+        <ul class="tab-slider--tabs">
+            <li class="tab-slider--trigger" [class.active]="viewMode == 'Push'" rel="Push" (click)="viewMode ='Push'">
+                Push</li>
+            <li class="tab-slider--trigger" [class.active]="viewMode == 'InApp'" rel="InApp"
+                (click)="viewMode ='InApp'">In-App</li>
+            <li class="tab-slider--trigger" [class.active]="viewMode == 'SMS'" rel="SMS" (click)="viewMode ='SMS'">SMS
+            </li>
+            <li class="tab-slider--trigger" [class.active]="viewMode == 'Email'" rel="Email"
+                (click)="viewMode ='Email'">Email</li>
+        </ul>
+    </div>
+    <div class="tab-slider--container" [ngSwitch]="viewMode">
+
+        <!-- PUSH TAB-->
+        <div id="Push" class="tab-slider--body" *ngSwitchCase="'Push'">
+            <form [formGroup]="settingdetails">
+                <div class="notification-content-wrapper">
+                    <div class="notification-header">Receive alerts only on your TCHOO app</div>
+                    <div class="notification-content">
+                        <div class="accordion-wrapper">
+
+                            <!-- MY OFFER COLLAPSE-->
+                            <div class="tab">
+                                <input type="checkbox" id="tab-checkbox-1" />
+                                <label class="tab-label" for="tab-checkbox-1">
+                                    <div class="common-checkbox">
+                                        <label class="control control--checkbox">
+                                            <input type="checkbox" name="allowAllOrders" [value]="Myorders"
+                                                (change)="allowAllOrders($event)"
+                                                [checked]="NotifyDetails.myOrder==true?true:false">
+                                            <div class="control__indicator"></div>
+                                            <h3>My orders</h3>
+                                            <h5>latest updates on your orders</h5>
+                                        </label>
+                                    </div>
+                                    <i class="fas fa-chevron-down up-down-arrow"></i>
+                                </label>
+                                <div class="tab-content">
+                                    <div class="notification-status-list" *ngFor="let order of Myorders">
+                                        <div class="common-checkbox">
+                                            <label class="control control--checkbox">
+                                                <input type="checkbox" name="{{order.value}}"
+                                                    [checked]="NotifyDetails.myOrder==true?true:order.selected==true?true:false"
+                                                    (change)="SettingOrderList($event)">
+                                                <div class="control__indicator"></div>
+                                                <h3>{{order.name}}</h3>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- RECOMMENDATIONS TAB -->
+                            <div class="tab">
+                                <input type="checkbox" id="tab-checkbox-3" />
+                                <label class="tab-label" for="tab-checkbox-3">
+                                    <div class="common-checkbox">
+                                        <label class="control control--checkbox">
+                                            <input type="checkbox" name="allowAllRecommend" [value]="Recommend"
+                                                (change)="allowAllRecommend($event)"
+                                                [checked]="NotifyDetails.recommendation==true?true:false">
+                                            <div class="control__indicator"></div>
+                                            <h3>Recommendations by soul & soul</h3>
+                                            <h5>Products ,offers adn curated content based pn your interest</h5>
+                                        </label>
+                                    </div>
+                                    <i class="fas fa-chevron-down up-down-arrow"></i>
+                                </label>
+                                <div class="tab-content">
+                                    <div class="notification-status-list" *ngFor="let recom of Recommend">
+                                        <div class="common-checkbox">
+                                            <label class="control control--checkbox">
+                                                <input type="checkbox" name="{{recom.value}}"
+                                                    [checked]="NotifyDetails.recommendation==true?true:recom.selected==true?true:false"
+                                                    (change)="SetRecommendList($event)">
+                                                <div class="control__indicator"></div>
+                                                <h3>{{recom.name}}</h3>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- RECOMMENDATIONS COLLAPSE-->
+                            <div class="tab">
+                                <input type="checkbox" id="tab-checkbox-4" />
+                                <label class="tab-label" for="tab-checkbox-4">
+                                    <div class="common-checkbox">
+                                        <label class="control control--checkbox">
+                                            <input type="checkbox" name="allowAllOffer" [value]="Offer"
+                                                (change)="allowAllOffer($event)"
+                                                [checked]="NotifyDetails.offers==true?true:false">
+                                            <div class="control__indicator"></div>
+                                            <h3>New offers</h3>
+                                            <h5>Top deals and more</h5>
+                                        </label>
+                                    </div>
+                                    <i class="fas fa-chevron-down up-down-arrow"></i>
+                                </label>
+                                <div class="tab-content">
+                                    <div class="notification-status-list" *ngFor="let off of Offer">
+                                        <div class="common-checkbox">
+                                            <label class="control control--checkbox">
+                                                <input type="checkbox" name="{{off.value}}" [checked]="off.selected"
+                                                    (change)="SetOfferList($event)"
+                                                    [checked]="NotifyDetails.offers==true?true:off.selected==true?true:false">
+                                                <div class="control__indicator"></div>
+                                                <h3>{{off.name}}</h3>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- FEEDBACK AND REVIEWS COLLAPSE-->
+                            <div class="tab">
+                                <input type="checkbox" id="tab-checkbox-6" />
+                                <label class="tab-label" for="tab-checkbox-6">
+                                    <div class="common-checkbox">
+                                        <label class="control control--checkbox">
+                                            <input type="checkbox" name="allowAllSupport" [value]="Support"
+                                                (change)="allowAllSupport($event)" [value]="Offer"
+                                                (change)="allowAllOffer($event)"
+                                                [checked]="NotifyDetails.support==true?true:false">
+                                            <div class="control__indicator"></div>
+                                            <h3>Feedback and reviews</h3>
+                                            <h5>Rating and review for your purchase</h5>
+                                        </label>
+                                    </div>
+                                    <i class="fas fa-chevron-down up-down-arrow"></i>
+                                </label>
+                                <div class="tab-content">
+                                    <div class="notification-status-list" *ngFor="let sup of Support">
+                                        <div class="common-checkbox">
+                                            <label class="control control--checkbox">
+                                                <input type="checkbox" name="{{sup.value}}" [checked]="sup.selected"
+                                                    (change)="SetSupportList($event)"
+                                                    [checked]="NotifyDetails.support==true?true:sup.selected==true?true:false">
+                                                <div class="control__indicator"></div>
+                                                <h3>{{sup.name}}</h3>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- IN APP TAB -->
+        <div id="InApp" class="tab-slider--body" *ngSwitchCase="'InApp'">
+            <form [formGroup]="settingdetails">
+                <div class="notification-content-wrapper">
+                    <div class="notification-header">Receive alerts only on your TCHOO app</div>
+                    <div class="notification-content">
+                        <div class="accordion-wrapper">
+
+                            <!-- MY OFFER COLLAPSE-->
+                            <div class="tab">
+                                <input type="checkbox" id="tab-checkbox-1" />
+                                <label class="tab-label" for="tab-checkbox-1">
+                                    <div class="common-checkbox">
+                                        <label class="control control--checkbox">
+                                            <input type="checkbox" name="allowAllOrders" [value]="Myorders"
+                                                (change)="allowAllOrders($event)"
+                                                [checked]="NotifyDetails.myOrder==true?true:false">
+                                            <div class="control__indicator"></div>
+                                            <h3>My orders</h3>
+                                            <h5>latest updates on your orders</h5>
+                                        </label>
+                                    </div>
+                                    <i class="fas fa-chevron-down up-down-arrow"></i>
+                                </label>
+                                <div class="tab-content">
+                                    <div class="notification-status-list" *ngFor="let order of Myorders">
+                                        <div class="common-checkbox">
+                                            <label class="control control--checkbox">
+                                                <input type="checkbox" name="{{order.value}}"
+                                                    [checked]="NotifyDetails.myOrder==true?true:order.selected==true?true:false"
+                                                    (change)="SettingOrderList($event)">
+                                                <div class="control__indicator"></div>
+                                                <h3>{{order.name}}</h3>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- RECOMMENDATIONS TAB -->
+                            <div class="tab">
+                                <input type="checkbox" id="tab-checkbox-3" />
+                                <label class="tab-label" for="tab-checkbox-3">
+                                    <div class="common-checkbox">
+                                        <label class="control control--checkbox">
+                                            <input type="checkbox" name="allowAllRecommend" [value]="Recommend"
+                                                (change)="allowAllRecommend($event)"
+                                                [checked]="NotifyDetails.recommendation==true?true:false">
+                                            <div class="control__indicator"></div>
+                                            <h3>Recommendations by soul & soul</h3>
+                                            <h5>Products ,offers adn curated content based pn your interest</h5>
+                                        </label>
+                                    </div>
+                                    <i class="fas fa-chevron-down up-down-arrow"></i>
+                                </label>
+                                <div class="tab-content">
+                                    <div class="notification-status-list" *ngFor="let recom of Recommend">
+                                        <div class="common-checkbox">
+                                            <label class="control control--checkbox">
+                                                <input type="checkbox" name="{{recom.value}}"
+                                                    [checked]="NotifyDetails.recommendation==true?true:recom.selected==true?true:false"
+                                                    (change)="SetRecommendList($event)">
+                                                <div class="control__indicator"></div>
+                                                <h3>{{recom.name}}</h3>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- RECOMMENDATIONS COLLAPSE-->
+                            <div class="tab">
+                                <input type="checkbox" id="tab-checkbox-4" />
+                                <label class="tab-label" for="tab-checkbox-4">
+                                    <div class="common-checkbox">
+                                        <label class="control control--checkbox">
+                                            <input type="checkbox" name="allowAllOffer" [value]="Offer"
+                                                (change)="allowAllOffer($event)"
+                                                [checked]="NotifyDetails.offers==true?true:false">
+                                            <div class="control__indicator"></div>
+                                            <h3>New offers</h3>
+                                            <h5>Top deals and more</h5>
+                                        </label>
+                                    </div>
+                                    <i class="fas fa-chevron-down up-down-arrow"></i>
+                                </label>
+                                <div class="tab-content">
+                                    <div class="notification-status-list" *ngFor="let off of Offer">
+                                        <div class="common-checkbox">
+                                            <label class="control control--checkbox">
+                                                <input type="checkbox" name="{{off.value}}" [checked]="off.selected"
+                                                    (change)="SetOfferList($event)"
+                                                    [checked]="NotifyDetails.offers==true?true:off.selected==true?true:false">
+                                                <div class="control__indicator"></div>
+                                                <h3>{{off.name}}</h3>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- FEEDBACK AND REVIEWS COLLAPSE-->
+                            <div class="tab">
+                                <input type="checkbox" id="tab-checkbox-6" />
+                                <label class="tab-label" for="tab-checkbox-6">
+                                    <div class="common-checkbox">
+                                        <label class="control control--checkbox">
+                                            <input type="checkbox" name="allowAllSupport" [value]="Support"
+                                                (change)="allowAllSupport($event)" [value]="Offer"
+                                                (change)="allowAllOffer($event)"
+                                                [checked]="NotifyDetails.support==true?true:false">
+                                            <div class="control__indicator"></div>
+                                            <h3>Feedback and reviews</h3>
+                                            <h5>Rating and review for your purchase</h5>
+                                        </label>
+                                    </div>
+                                    <i class="fas fa-chevron-down up-down-arrow"></i>
+                                </label>
+                                <div class="tab-content">
+                                    <div class="notification-status-list" *ngFor="let sup of Support">
+                                        <div class="common-checkbox">
+                                            <label class="control control--checkbox">
+                                                <input type="checkbox" name="{{sup.value}}" [checked]="sup.selected"
+                                                    (change)="SetSupportList($event)"
+                                                    [checked]="NotifyDetails.support==true?true:sup.selected==true?true:false">
+                                                <div class="control__indicator"></div>
+                                                <h3>{{sup.name}}</h3>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- SMS TAB -->
+        <div id="SMS" class="tab-slider--body" *ngSwitchCase="'SMS'">
+            <form [formGroup]="settingdetails">
+                <div class="notification-content-wrapper">
+                    <div class="notification-header">Get instant message on your TCHOO registered phone number</div>
+                    <div class="notification-content">
+                        <div class="accordion-wrapper">
+
+                            <!-- MY OFFER COLLAPSE-->
+                            <div class="tab">
+                                <input type="checkbox" id="tab-checkbox-1" />
+                                <label class="tab-label" for="tab-checkbox-1">
+                                    <div class="common-checkbox">
+                                        <label class="control control--checkbox">
+                                            <input type="checkbox" name="allowAllOrders" [value]="Myorders"
+                                                (change)="allowAllOrders($event)"
+                                                [checked]="NotifyDetails.myOrder==true?true:false">
+                                            <div class="control__indicator"></div>
+                                            <h3>My orders</h3>
+                                            <h5>latest updates on your orders</h5>
+                                        </label>
+                                    </div>
+                                    <i class="fas fa-chevron-down up-down-arrow"></i>
+                                </label>
+                                <div class="tab-content">
+                                    <div class="notification-status-list" *ngFor="let order of Myorders">
+                                        <div class="common-checkbox">
+                                            <label class="control control--checkbox">
+                                                <input type="checkbox" name="{{order.value}}"
+                                                    [checked]="NotifyDetails.myOrder==true?true:order.selected==true?true:false"
+                                                    (change)="SettingOrderList($event)">
+                                                <div class="control__indicator"></div>
+                                                <h3>{{order.name}}</h3>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- RECOMMENDATIONS TAB -->
+                            <div class="tab">
+                                <input type="checkbox" id="tab-checkbox-3" />
+                                <label class="tab-label" for="tab-checkbox-3">
+                                    <div class="common-checkbox">
+                                        <label class="control control--checkbox">
+                                            <input type="checkbox" name="allowAllRecommend" [value]="Recommend"
+                                                (change)="allowAllRecommend($event)"
+                                                [checked]="NotifyDetails.recommendation==true?true:false">
+                                            <div class="control__indicator"></div>
+                                            <h3>Recommendations by soul & soul</h3>
+                                            <h5>Products ,offers adn curated content based pn your interest</h5>
+                                        </label>
+                                    </div>
+                                    <i class="fas fa-chevron-down up-down-arrow"></i>
+                                </label>
+                                <div class="tab-content">
+                                    <div class="notification-status-list" *ngFor="let recom of Recommend">
+                                        <div class="common-checkbox">
+                                            <label class="control control--checkbox">
+                                                <input type="checkbox" name="{{recom.value}}"
+                                                    [checked]="NotifyDetails.recommendation==true?true:recom.selected==true?true:false"
+                                                    (change)="SetRecommendList($event)">
+                                                <div class="control__indicator"></div>
+                                                <h3>{{recom.name}}</h3>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- RECOMMENDATIONS COLLAPSE-->
+                            <div class="tab">
+                                <input type="checkbox" id="tab-checkbox-4" />
+                                <label class="tab-label" for="tab-checkbox-4">
+                                    <div class="common-checkbox">
+                                        <label class="control control--checkbox">
+                                            <input type="checkbox" name="allowAllOffer" [value]="Offer"
+                                                (change)="allowAllOffer($event)"
+                                                [checked]="NotifyDetails.offers==true?true:false">
+                                            <div class="control__indicator"></div>
+                                            <h3>New offers</h3>
+                                            <h5>Top deals and more</h5>
+                                        </label>
+                                    </div>
+                                    <i class="fas fa-chevron-down up-down-arrow"></i>
+                                </label>
+                                <div class="tab-content">
+                                    <div class="notification-status-list" *ngFor="let off of Offer">
+                                        <div class="common-checkbox">
+                                            <label class="control control--checkbox">
+                                                <input type="checkbox" name="{{off.value}}" [checked]="off.selected"
+                                                    (change)="SetOfferList($event)"
+                                                    [checked]="NotifyDetails.offers==true?true:off.selected==true?true:false">
+                                                <div class="control__indicator"></div>
+                                                <h3>{{off.name}}</h3>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- FEEDBACK AND REVIEWS COLLAPSE-->
+                            <div class="tab">
+                                <input type="checkbox" id="tab-checkbox-6" />
+                                <label class="tab-label" for="tab-checkbox-6">
+                                    <div class="common-checkbox">
+                                        <label class="control control--checkbox">
+                                            <input type="checkbox" name="allowAllSupport" [value]="Support"
+                                                (change)="allowAllSupport($event)" [value]="Offer"
+                                                (change)="allowAllOffer($event)"
+                                                [checked]="NotifyDetails.support==true?true:false">
+                                            <div class="control__indicator"></div>
+                                            <h3>Feedback and reviews</h3>
+                                            <h5>Rating and review for your purchase</h5>
+                                        </label>
+                                    </div>
+                                    <i class="fas fa-chevron-down up-down-arrow"></i>
+                                </label>
+                                <div class="tab-content">
+                                    <div class="notification-status-list" *ngFor="let sup of Support">
+                                        <div class="common-checkbox">
+                                            <label class="control control--checkbox">
+                                                <input type="checkbox" name="{{sup.value}}" [checked]="sup.selected"
+                                                    (change)="SetSupportList($event)"
+                                                    [checked]="NotifyDetails.support==true?true:sup.selected==true?true:false">
+                                                <div class="control__indicator"></div>
+                                                <h3>{{sup.name}}</h3>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- EMAIL TAB -->
+        <div id="Email" class="tab-slider--body" *ngSwitchCase="'Email'">
+            <form [formGroup]="settingdetails">
+                <div class="notification-content-wrapper">
+                    <div class="notification-header">Get notified via your TCHOO registered email id</div>
+                    <div class="notification-content">
+                        <div class="accordion-wrapper">
+
+                            <!-- MY OFFER COLLAPSE-->
+                            <div class="tab">
+                                <input type="checkbox" id="tab-checkbox-1" />
+                                <label class="tab-label" for="tab-checkbox-1">
+                                    <div class="common-checkbox">
+                                        <label class="control control--checkbox">
+                                            <input type="checkbox" name="allowAllOrders" [value]="Myorders"
+                                                (change)="allowAllOrders($event)"
+                                                [checked]="NotifyDetails.myOrder==true?true:false">
+                                            <div class="control__indicator"></div>
+                                            <h3>My orders</h3>
+                                            <h5>latest updates on your orders</h5>
+                                        </label>
+                                    </div>
+                                    <i class="fas fa-chevron-down up-down-arrow"></i>
+                                </label>
+                                <div class="tab-content">
+                                    <div class="notification-status-list" *ngFor="let order of Myorders">
+                                        <div class="common-checkbox">
+                                            <label class="control control--checkbox">
+                                                <input type="checkbox" name="{{order.value}}"
+                                                    [checked]="NotifyDetails.myOrder==true?true:order.selected==true?true:false"
+                                                    (change)="SettingOrderList($event)">
+                                                <div class="control__indicator"></div>
+                                                <h3>{{order.name}}</h3>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- RECOMMENDATIONS TAB -->
+                            <div class="tab">
+                                <input type="checkbox" id="tab-checkbox-3" />
+                                <label class="tab-label" for="tab-checkbox-3">
+                                    <div class="common-checkbox">
+                                        <label class="control control--checkbox">
+                                            <input type="checkbox" name="allowAllRecommend" [value]="Recommend"
+                                                (change)="allowAllRecommend($event)"
+                                                [checked]="NotifyDetails.recommendation==true?true:false">
+                                            <div class="control__indicator"></div>
+                                            <h3>Recommendations by soul & soul</h3>
+                                            <h5>Products ,offers adn curated content based pn your interest</h5>
+                                        </label>
+                                    </div>
+                                    <i class="fas fa-chevron-down up-down-arrow"></i>
+                                </label>
+                                <div class="tab-content">
+                                    <div class="notification-status-list" *ngFor="let recom of Recommend">
+                                        <div class="common-checkbox">
+                                            <label class="control control--checkbox">
+                                                <input type="checkbox" name="{{recom.value}}"
+                                                    [checked]="NotifyDetails.recommendation==true?true:recom.selected==true?true:false"
+                                                    (change)="SetRecommendList($event)">
+                                                <div class="control__indicator"></div>
+                                                <h3>{{recom.name}}</h3>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- RECOMMENDATIONS COLLAPSE-->
+                            <div class="tab">
+                                <input type="checkbox" id="tab-checkbox-4" />
+                                <label class="tab-label" for="tab-checkbox-4">
+                                    <div class="common-checkbox">
+                                        <label class="control control--checkbox">
+                                            <input type="checkbox" name="allowAllOffer" [value]="Offer"
+                                                (change)="allowAllOffer($event)"
+                                                [checked]="NotifyDetails.offers==true?true:false">
+                                            <div class="control__indicator"></div>
+                                            <h3>New offers</h3>
+                                            <h5>Top deals and more</h5>
+                                        </label>
+                                    </div>
+                                    <i class="fas fa-chevron-down up-down-arrow"></i>
+                                </label>
+                                <div class="tab-content">
+                                    <div class="notification-status-list" *ngFor="let off of Offer">
+                                        <div class="common-checkbox">
+                                            <label class="control control--checkbox">
+                                                <input type="checkbox" name="{{off.value}}" [checked]="off.selected"
+                                                    (change)="SetOfferList($event)"
+                                                    [checked]="NotifyDetails.offers==true?true:off.selected==true?true:false">
+                                                <div class="control__indicator"></div>
+                                                <h3>{{off.name}}</h3>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- FEEDBACK AND REVIEWS COLLAPSE-->
+                            <div class="tab">
+                                <input type="checkbox" id="tab-checkbox-6" />
+                                <label class="tab-label" for="tab-checkbox-6">
+                                    <div class="common-checkbox">
+                                        <label class="control control--checkbox">
+                                            <input type="checkbox" name="allowAllSupport" [value]="Support"
+                                                (change)="allowAllSupport($event)" [value]="Offer"
+                                                (change)="allowAllOffer($event)"
+                                                [checked]="NotifyDetails.support==true?true:false">
+                                            <div class="control__indicator"></div>
+                                            <h3>Feedback and reviews</h3>
+                                            <h5>Rating and review for your purchase</h5>
+                                        </label>
+                                    </div>
+                                    <i class="fas fa-chevron-down up-down-arrow"></i>
+                                </label>
+                                <div class="tab-content">
+                                    <div class="notification-status-list" *ngFor="let sup of Support">
+                                        <div class="common-checkbox">
+                                            <label class="control control--checkbox">
+                                                <input type="checkbox" name="{{sup.value}}" [checked]="sup.selected"
+                                                    (change)="SetSupportList($event)"
+                                                    [checked]="NotifyDetails.support==true?true:sup.selected==true?true:false">
+                                                <div class="control__indicator"></div>
+                                                <h3>{{sup.name}}</h3>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

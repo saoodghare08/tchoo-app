@@ -1,0 +1,252 @@
+<section class="customer-info-section {{selectedlanguage =='Arabic (عربي)' ? 'left-to-right':''}}"
+  [ngClass]="{'modal-patch': modalPatch }">
+  <!-- BACK TO PAGE -->
+  <div class="back-top-page">
+    <a (click)="backNavigation()">
+      <img src="/assets/img/icons/back-arrow.svg" alt="arrow" />
+      <span>{{selectedlanguage =='Arabic (عربي)' ? 'معلومات العميل':'Customer Information'}} </span>
+    </a>
+  </div>
+  <!-- ORDER WIZARD -->
+  <div class="order-wizard">
+    <div class="stepper-wrapper">
+      <div class="stepper-item completed">
+        <div class="step-counter"><i class="fa-solid fa-check"></i></div>
+        <div class="step-name">{{selectedlanguage =='Arabic (عربي)' ?'عربتي':'My Cart'}}</div>
+      </div>
+      <div class="stepper-item active">
+        <div class="step-counter">2</div>
+        <div class="step-name">{{selectedlanguage =='Arabic (عربي)' ?'معلومات العميل':'Customer information'}}</div>
+      </div>
+      <!-- <div class="stepper-item">
+        <div class="step-counter">3</div>
+        <div class="step-name">{{selectedlanguage =='Arabic (عربي)' ?'طريقة الشحن':'Shipping method'}}</div>
+      </div> -->
+      <div class="stepper-item">
+        <div class="step-counter">3</div>
+        <div class="step-name">{{selectedlanguage =='Arabic (عربي)' ?'المدفوعات':'Payment'}}</div>
+      </div>
+    </div>
+  </div>
+  <!-- EXISTING ADDRESS -->
+  <!-- <ng-template #Existingadd> -->
+  <div *ngIf="addlist != undefined && addlist?.length != 0">
+    <div class="order-main-wrapper">
+      <div class="form-group mb-5">
+        <label class="form-label">{{selectedlanguage =='Arabic (عربي)' ?'عنوان البريد الإلكتروني':'Email Address'}}</label>
+        <input type="text" name="email" class="form-control sty1" placeholder="Enter Email" [value]="sAddress.email"
+          disabled />
+      </div>
+      <!-- SHIPPING ADDRESS WRAPPER  -->
+      <div class="shipping-address-wrapper">
+        <div class="shipping-address-header">
+          <h3>{{selectedlanguage =='Arabic (عربي)' ? 'عنوان الشحن':'Shipping Address'}}</h3>
+          <button class="btn btn-dark" (click)="showSelectAddressMd()">{{selectedlanguage =='Arabic (عربي)'
+            ?'التغييرات':'Change'}}</button>
+        </div>
+        <div class="shipping-address-list mb-3">
+          <p>
+            {{ sAddress.locality }} {{ sAddress.state }} {{ sAddress.city }}
+            {{ sAddress.zipcode }}
+          </p>
+          <a href="javascript:void(0)" class="address-select">{{ sAddress.type }}</a>
+        </div>
+      </div>
+      <!--Coupon -->
+      <div class="apply-discount-code mt-4">
+        <div class="form-group">
+          <div class="d-flex justify-content-between">
+            <label class="form-label">{{selectedlanguage =='Arabic (عربي)' ?'تطبيق رمز الخصم':'Apply discount code'}}</label>
+            <a (click)="viewCoupon()">{{selectedlanguage =='Arabic (عربي)' ?'عرض الكل':'view all'}}</a>
+          </div>
+          <div class="apply-discount-input mb-2">
+            <form [formGroup]="coupon_Code" (ngSubmit)="getDiscountValue()">
+              <div class="input-group">
+                <input type="text" name="discount" formControlName="coupon_Code" class="form-control"
+                  placeholder="Discount Code" />
+                <div class="input-group-prepend">
+                  <button class="btn btn-dark py-2 apply-bttns" style="height: 50px;" type="submit">Apply</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- <h6 class="success-payment-msg" *ngIf="Discount?.coupenCode && isCouponApplied"><i
+              class="fa-solid fa-check"></i> <span class="text-success">
+              Coupon {{Discount?.coupenCode}} added successfully</span></h6> -->
+        </div>
+        <div class="modal-body-wrapper mt-4" *ngIf="CouponArr?.length > 0">
+          <h3 class="coupon-title">{{selectedlanguage =='Arabic (عربي)' ?'متاح':'Available'}}</h3>
+          <div class="apply-coupon-wrapper">
+            <div class="apply-coupon-list before_strap_{{Coupon.coupenCode}}" *ngFor="let Coupon of CouponArr">
+              <div class="apply-bttn">
+                <button type="button" class="btn btn-dark"  class="applycouponId_{{Coupon.coupenCode}}" [style]="{'display':'block'}"
+                  (click)="getDiscountfromlist(Coupon)">{{selectedlanguage =='Arabic (عربي)'
+                  ?'للتقديم':'Apply'}}</button>
+                <button type="button" class="btn btn-dark" class="removecouponId_{{Coupon.coupenCode}}" [style]="{'display':'none'}"
+                  (click)="RemoveDiscount(Coupon)">{{selectedlanguage =='Arabic (عربي)' ?'يزيل':'Remove'}}</button>
+              </div>
+              <h2>{{Coupon.coupenCode}}</h2>
+              <h3>{{selectedlanguage =='Arabic (عربي)' ?'للحفظ':'Save'}} <b>{{Coupon.discountPercnt}}%
+                </b>{{selectedlanguage =='Arabic (عربي)' ?'على هذا الشراء':'on this order'}} </h3>
+              <p class="coupon-desc">{{descdata[0]}} </p>
+              <p class="coupon-desc">{{descdata[1]}} </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-details mt-4">
+        <h2>{{selectedlanguage=='Arabic (عربي)' ? 'تفاصيل السعر':'Price Details'}}</h2>
+        <div class="payment-details-list" [class]="{ active: active }">
+          <ul>
+            <li>
+              <span>{{selectedlanguage =='Arabic (عربي)' ?'سعر':'Price'}} ({{ Totalqty }} items)</span>
+              <span>₹ {{ productTotal | number : '1.0-0'}}</span>
+            </li>
+            <li>
+              <span>{{selectedlanguage =='Arabic (عربي)' ? 'تخفيض':'Discount'}}</span>
+              <span>₹ {{ discount | number : '1.0-0' }}</span>
+            </li>
+            <li>
+              <span>{{selectedlanguage =='Arabic (عربي)' ?'رسوم التوصيل':'Delivery Charges'}}</span>
+              <span>{{(productTotal)>165? 'Free':selectedlanguage =='Arabic (عربي)' ?'﷼.32 ':'SAR 32'}}</span>
+            </li>
+            <li class="total">
+              <b>{{selectedlanguage =='Arabic (عربي)' ?'المبلغ الإجمالي':'Total Amount'}}</b>
+              <b>₹ {{ grandTotalAmount | number : '1.0-0'}} </b>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- </ng-template> -->
+  <!-- ADD NEW ADDRESS -->
+  <div *ngIf="addlist != undefined && addlist?.length == 0">
+    <div class="add-new-address-wrapper">
+      <a href="/AddAddress/{{createdby}}/{{HubId}}/initial/customerinfo/{{cartId}}">+ {{selectedlanguage =='Arabic (عربي)'?'أضف عنوانًا جديدًا':'Add a new address'}}</a>
+    </div>
+  </div>
+  <!-- ORDER BOTTOM FOOTER -->
+  <div class="order-bottom-footer">
+    <div class="footer-content">
+      <div>
+        <h4>
+          {{selectedlanguage =='Arabic (عربي)' ?'المجاميع':'Total'}}:
+          <b> ₹ {{ grandTotalAmount | number : '1.0-0'}} </b>
+        </h4>
+        <!-- <h6 class="msg-address" *ngIf="Hub==null">Not deliverable to this address</h6> -->
+        <!-- <h6 class="msg-address" *ngIf="grandTotalAmount<Hub?.amountLimit">Minimum Order Value to be SAR 50</h6> -->
+      </div>
+      <div>
+        <!-- <button type="button" *ngIf="Hub == null || grandTotalAmount<Hub?.amountLimit" class="btn btn-dark disabled" (click)="Step1()">
+         {{selectedlanguage =='Arabic (عربي)' ?'يستمر الشحن':' Continue'}}
+        </button> -->
+        <!-- <button type="button" *ngIf="Hub!= null && grandTotalAmount>Hub?.amountLimit" class="btn btn-dark" (click)="Step1()">
+          {{selectedlanguage =='Arabic (عربي)' ?'يستمر الشحن':' Continue'}}
+         </button> -->
+        <button type="button" class="btn btn-dark" (click)="Step1()" [ngClass]="{'disabled':addlist == undefined || addlist?.length==0}">
+          {{selectedlanguage =='Arabic (عربي)' ?'يستمر':' Continue'}}
+        </button>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- CHANGE ADDRESS MODAL -->
+  <div class="change-address-modal" [ngClass]="{'change-address-open': changeAddressopen }">
+    <div class="modal-header">
+      <h5>{{selectedlanguage =='Arabic (عربي)' ?'حدد العنوان':'Select Address'}} </h5>
+      <a class="change-password-close-modal" (click)="addressCloseMd()"><i class="fa-solid fa-xmark"></i></a>
+    </div>
+    <div class="modal-body">
+      <div class="changes-address-content">
+        <ul>
+          <li *ngFor="let address of addlist">
+           <div style="display: flex;">
+            <div class="select-address-content common-radio-bttn">
+              <input type="radio" id="{{ address.addId }}" value="{{ address.addId }}" name="change" [(ngModel)]="selectedAdd" (change)="selectedAddress()"/>
+              <label for="{{ address.addId }}">
+                <b>{{ address.firstName }}{{ address.lastName }}</b>
+                <p>
+                  {{ address.locality }} {{ address.state }}
+                  {{ address.city }} {{ address.zipcode }}
+                </p>
+              </label>
+            </div>
+           <div style="display: flex;">
+            <div>
+              <a href="javascript:void(0)" class="address-select">{{ address.type }}</a>
+            </div>
+           <div>
+            <a class="edit-icon" routerLink="/EditAddress/{{createdby}}/{{address.addId}}/{{HubId}}"  class="edit-address" href="javascript:void(0)"><i class="fa-solid fa-pen-to-square"></i></a>
+           </div>
+           </div>
+           </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a type="button" class="btn btn-dark w-100"
+        href="/AddAddress/{{createdby}}/{{HubId}}/initial/customerinfo/{{cartId}}">{{selectedlanguage =='Arabic (عربي)' ?'اضف عنوان':'Add New Address'}}</a>
+    </div>
+  </div>
+</section>
+
+<!-- APPLY COUPON CODE MODAL -->
+<div class="apply-coupon-modal" [ngClass]="{'apply-coupon-moda-open': appycouponModal }">
+  <div class="apply-discount-modal">
+    <div class="modal-header">
+      <h5>{{selectedlanguage =='Arabic (عربي)' ?'لتطبيق القسيمة':'Apply Coupon'}}</h5>
+      <a class="close-modal" (click)="closeAppyCouponModal()"><i class="fa-solid fa-xmark"></i></a>
+    </div>
+    <div class="modal-body">
+      <div class="modal-body-wrapper" *ngIf="CouponArr?.length >0">
+        <h3 class="coupon-title">{{selectedlanguage =='Arabic (عربي)' ?'متاح':'Available'}}</h3>
+        <div class="apply-coupon-wrapper">
+          <div class="apply-coupon-list before_strap_{{Coupon.coupenCode}}" *ngFor="let Coupon of CouponArr">
+            <div class="apply-bttn">
+              <!-- class="{{Coupon.id}}applycouponId" [style]="{'display':'block'}" -->
+              <button type="button" class="btn btn-dark"  class="applycouponId_{{Coupon.coupenCode}}" [style]="{'display':'block'}"
+                (click)="getDiscountfromlist(Coupon)">{{selectedlanguage =='Arabic (عربي)' ?'للتقديم':'Apply'}}</button>
+                <!-- class="{{Coupon.id}}removecouponId" [style]="{'display':'none'}" -->
+              <button type="button" class="btn btn-dark"  class="removecouponId_{{Coupon.coupenCode}}" [style]="{'display':'none'}">{{selectedlanguage =='Arabic (عربي)'
+                ?'مُطبَّق':'Applied'}}</button>
+            </div>
+            <h2>{{Coupon.coupenCode}}</h2>
+            <h3>{{selectedlanguage =='Arabic (عربي)' ?'للحفظ':'Save'}} <b>{{Coupon.discountPercnt}}%
+              </b>{{selectedlanguage =='Arabic (عربي)' ?'على هذا الشراء':'on this order'}} </h3>
+            <p class="coupon-desc">{{Coupon.shortDescription}}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="CouponArr?.length < 1">
+        <h3 class="coupon-title">{{selectedlanguage =='Arabic (عربي)' ?'لا توجد كوبونات متاحة':'No coupons Available'}}
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="choose-payment" [ngClass]="{'choose-payment-open': choosePayment }">
+  <!-- MODAL HEADER -->
+  <div class="modal-header">
+    <h5>{{selectedlanguage =='Arabic (عربي)' ?'اختر الدفع':'Choose Payment'}} </h5>
+    <a class="change-password-close-modal" (click)="choosePayCloseMd()"><i class="fa-solid fa-xmark"></i></a>
+  </div>
+  <!-- MODAL BODY -->
+  <div class="modal-body">
+    <div class="payment-bttn" *ngIf="device.os != 'Android'">
+      <button type="button" class="btn btn-default" (click)="payment('ApplePay')"><img
+          src="/assets/img/payment/apple.svg" alt="icon" /> Apple Pay</button>
+    </div>
+    <div class="payment-bttn">
+      <button type="button" class="btn btn-default" (click)="payment('VISA')"><img src="/assets/img/payment/visa.svg"
+          alt="icon" /> Card Payment</button>
+    </div>
+    <div class="payment-bttn">
+      <button type="button" class="btn btn-default" (click)="payment('MADA')"><img src="/assets/img/payment/mada.svg"
+          alt="icon" /> Mada Pay</button>
+    </div>
+  </div>
+</div>

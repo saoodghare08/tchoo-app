@@ -1,0 +1,167 @@
+.offer-status-section {
+    height: 100%;
+    overflow-y: auto;
+    padding-bottom: 70px;
+    .user-title {
+        top: 0;
+        padding: 20px;
+        display: flex;
+        position: sticky;
+        align-items: center;
+        background-color: #ffffff;
+        justify-content: space-between;
+        box-shadow: rgba(149, 157, 165, 0.2) 1px 8px 24px;
+
+        a {
+            color: #000000;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        p {
+            color: #222;
+            font-size: 12px;
+            font-weight: 400;
+            overflow: hidden;
+            margin-top: 5px;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            margin-left: 20px;
+        }
+
+        h5 {
+            color: #9E0000;
+            font-size: 12px;
+            font-weight: 500;
+            margin-left: 20px;
+        }
+
+    }
+   
+    .offers-list-content {
+        .apply-discount-title {
+            color: #222;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 10px 20px;
+        }
+
+        .baga-offer-content {
+            padding: 20px;
+            .offer-content-box {
+                display: flex;
+                align-items: center;
+                padding: 20px;
+                margin-bottom: 20px;
+                background-color: #ffffff;;
+                .offer-product {
+                    flex: 25% 0;
+                    .product {
+                        padding: 10px;
+                        img {
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                }
+
+                .offer-content {
+                    flex: 50% 0;
+                    padding: 0 10px;
+                    h3 {
+                        color: #000;
+                        font-size: 13px;
+                        font-weight: 600;
+                    }
+                    p {
+                        color: #222;
+                        font-size: 12px;
+                        font-weight: 400;
+                        overflow: hidden;
+                        line-height: 16px;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                    }
+
+                    h4 {
+                        color: #222;
+                        font-size: 14px;
+                        font-weight: 600;
+                        margin-bottom: 5px;
+                        span {
+                            color: #DF3737;
+                            font-size: 12px;
+                            font-weight: 500;
+                            margin-right: 5px;
+                            text-decoration: line-through; 
+                        }
+                    }
+                }
+
+                .qty {
+                    flex: 25% 0;
+                }
+            }
+    }
+    }
+
+    .offer-footer-bttn {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        z-index: 99;
+        padding: 20px;
+        height: 70px;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #ffffff;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px -7px 24px;
+        .offer-lock-unlock {
+            color: #8A8A8A;
+            font-size: 14px;
+            font-weight: 500;
+        }
+    }
+}
+
+/* TABLET VIEW MEDIA QUERY */
+@media only screen and (max-width: 768px) {
+    .offer-status-section {
+        width: 100%;
+        box-shadow: none;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .offer-status-section {
+        width: 100%;
+        box-shadow: none;
+    }
+}
+
+/* MOBILE VIEW MEDIA QUERY */
+@media only screen and (max-width: 480px) {
+    .offer-status-section {
+        width: 100%;
+        box-shadow: none;
+        .offers-list-content {
+            .baga-offer-content {
+                padding: 0;
+                .mobile-m0 {
+                    padding: 0;
+                    margin: 0;
+                }
+
+                .offer-content-box {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+}

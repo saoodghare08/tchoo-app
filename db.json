@@ -1,0 +1,59 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "recentViewedProduct": [
+    {
+      "itemid": "ITEM06",
+      "productName": "Sample1",
+      "description": "Description5",
+      "price": "200",
+      "createby": "",
+      "id": 1
+    },
+    {
+      "itemid": "ITEM06",
+      "productName": "Sample1",
+      "description": "Description5",
+      "price": "200",
+      "createby": "",
+      "id": 2
+    }
+  ],
+  "mycart": [
+    {
+      "itemid": "CI002",
+      "img": "/assets/img/features/1.png",
+      "productName": "Green Tea Gunpowder",
+      "description": "Intense taste, subtle and fresh scent, has a soft, luscious.",
+      "price": "86.00",
+      "createby": "",
+      "quantity": 0,
+      "id": 5
+    },
+    {
+      "itemid": "CI002",
+      "img": "/assets/img/features/1.png",
+      "productName": "Green Tea Gunpowder",
+      "description": "Intense taste, subtle and fresh scent, has a soft, luscious.",
+      "price": "86.00",
+      "createby": "",
+      "quantity": 0,
+      "id": 6
+    }
+  ]
+}

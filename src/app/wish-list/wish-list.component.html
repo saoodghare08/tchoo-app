@@ -1,0 +1,93 @@
+<section class="wish-list-section {{selectedlanguage =='Arabic (عربي)' ? 'left-to-right':''}}"
+  [ngClass]="{'modal-patch': modalPatch }">
+  <div class="user-title">
+    <div class="title">
+    </div>
+  </div>
+  <!-- MY WISH LIST -->
+  <div class="wish-list-wrapper">
+    <div class="row">
+      <div class="col-6 col-md-4 col-lg-2" *ngFor="let wish of getWishListData;let i=index">
+        <div class="card">
+          <a href="javascript:void(0)" class="remove text-danger" (click)="RemoveItemFromWishList(wish.id)">
+            <i class="fa-solid fa-trash-can"></i>
+          </a>
+          <div class="card-img-top">
+            <img src="{{ wish.description }}" alt="card" />
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ wish.pluName }}</h5>
+            <!-- <p *ngIf="wish?.stockQty < 10 && wish?.stockQty != 0" class="fw-bold" style="font-size: 12px;color: #797979; margin: 0;">
+             {{selectedlanguage=='Arabic (عربي)'?'مخزون محدود':'Limited Stock'}}
+            </p> -->
+            <a href="javascript:void(0)" class="btn btn-dark" *ngIf="wish.stockQty != 0"
+              (click)="addToCart(wish)">{{selectedlanguage =='Arabic (عربي)'?'أضف إلى السلة':'Add to Bag'}}</a>
+            <p *ngIf="wish.stockQty == 0" class="text-danger">
+              {{selectedlanguage=='Arabic (عربي)'?'إنتهى من المخزن':'Out Of Stock'}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- PAGE EMPTY STATE -->
+  <div class="page-empty-state wishlist-empty-state" *ngIf="getWishListData?.length == 0">
+    <div class="empty-img">
+      <img src="/assets/img/empty-state/empty-state.png" alt="empty" />
+    </div>
+
+    <div class="empty-state-content">
+      <h2>{{selectedlanguage =='Arabic (عربي)'?'قائمة الرغبات فارغة':'Your WishList is Empty'}}</h2>
+      <p>{{selectedlanguage =='Arabic (عربي)'?'اضغط على زر القلب لبدء حفظ العناصر المفضلة لديك.':'Tap heart button to start saving your favorite items.'}}</p>
+      <a href="Main-Category/{{ custId }}/{{HubId}}">{{selectedlanguage =='Arabic (عربي)'?'إضافة عناصر':'Add Items'}}</a>
+    </div>
+  </div>
+  <!-- SELECT VARIANT -->
+  <div class="select-variant" [ngClass]="{ 'product-variant': variantView }">
+    <div class="variant-header">
+      <h2>{{selectedlanguage =='Arabic (عربي)' ?'اختر واحدة':'Choose One'}}</h2>
+      <a (click)="closeVariant()"><i class="fa-solid fa-xmark"></i></a>
+    </div>
+    <div class="variant-body">
+      <div class="variant-product">
+        <div class="img">
+          <img src="{{displayimg}}" alt="product" />
+        </div>
+        <div>
+          <h5>{{ itemName }}</h5>
+          <h4>₹ {{ selectedPrice }}</h4>
+        </div>
+      </div>
+      <div class="variants-details">
+        <h2>{{selectedlanguage =='Arabic (عربي)' ?'المتغيرات:':'Variants:'}}</h2>
+        <div class="variants-details-wrapper">
+          <div class="variants-card" *ngFor="let v of cartlist?.pricelist;let i=index;">
+            <div class="variants-card-img-wrapper">
+              <div class="variants-card-img" (click)="varientChange(v.sellingPrice, v.priceId,i,v.stockQty)"
+                [ngClass]="{ 'active':i == varianceindex}">
+                <i class="fa-solid fa-circle-check active-check" *ngIf="v.ishubMap == 'true'"></i>
+                <img src="{{v.imagePath}}" alt="variant" />
+              </div>
+              <h3>{{ v.size }}</h3>
+              <!-- <p *ngIf="v.stockQty < 10 && v.ishubMap == 'false' && v.priceId == selectedSize && v.stockQty != 0" class="fw-bold" style="font-size: 10px;color: #797979; margin: 0;">
+               {{selectedlanguage=='Arabic (عربي)'?'مخزون محدود':'Limited Stock'}}
+              </p> -->
+            </div>
+            <div class="continue-bttn">
+              <div class="continue-bttn-divide">
+                <a class="btn btn-dark" (click)="continueProduct()"
+                  *ngIf="v.ishubMap == 'false' && v.priceId == selectedSize && v.stockQty != 0">{{selectedlanguage
+                  =='Arabic (عربي)' ?'أضف إلى السلة':'Add to Bag'}}</a>
+                <p *ngIf="v.stockQty == 0 && v.ishubMap == 'false' && v.priceId == selectedSize" class="text-danger">
+                  {{selectedlanguage=='Arabic (عربي)'?'إنتهى من المخزن':'Out Of Stock'}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- BOTTOM LAYOUT -->
+<!-- <app-bottom-layout></app-bottom-layout> -->

@@ -1,0 +1,51 @@
+.unavailable-section {
+    height: 100%;
+    position: relative;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: url("/assets/img/Background.png");
+    background-color: #dfdfe1;
+
+    .begin-journey-wrapper {
+        padding: 20px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        backdrop-filter: blur(61px);
+        background: linear-gradient(108.74deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.78) 100%);
+
+        h2 {
+            color: #111111;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 39px;
+            margin-bottom: 5px;
+        }
+
+        p {
+            color: #747474;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 22px;
+            margin-bottom: 80px;
+
+            a {
+                color: rgba(5, 113, 230, 1);
+                text-decoration: underline;
+            }
+        }
+
+        button {
+            width: 100%;
+            padding: 15px 10px;
+            color: #FFFFFF;
+            display: block;
+            text-align: center;
+            border-radius: 12px;
+            font-size: 16px;
+            background-color: #222222;
+        }
+    }
+}

@@ -1,0 +1,63 @@
+.common-loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+
+    .common-loader {
+        text-align: center;
+
+        .sns-logo {
+            img {
+                width: 200px;
+            }
+        }
+        .gif-loader {
+            width: 25px;
+            height: 25px;
+            object-fit: contain;
+            margin-right: 10px;
+        }
+
+        span {
+            color: #000000;
+            font-weight: 400;
+            font-size: 14px;
+        }
+    }
+}
+
+.page-loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.65);
+
+    .page-loader {
+        text-align: center;
+
+        .gif-loader {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-right: 10px;
+        }
+    }
+}
+
+.custom-style{
+  background-color:brown;
+  color:white;
+}

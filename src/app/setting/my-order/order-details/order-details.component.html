@@ -1,0 +1,191 @@
+<section class="order-details-section {{selectedlanguage=='Arabic (عربي)' ? 'left-to-right':''}}">
+  <!-- ORDER STATUS -->
+  <div class="order-status-wrapper">
+    <div class="content">
+      <h3>{{selectedlanguage =='Arabic (عربي)' ? 'رقم الأمر':'Order Number'}}</h3>
+      <h6>#{{ salesData.salesOrder.salesOrderId }}</h6>
+    </div>
+    <div class="content">
+      <h3>{{selectedlanguage =='Arabic (عربي)' ? 'المبلغ الإجمالي':'Total Amount'}}</h3>
+      <h6>₹ {{GrandTotal | number : '1.0-0' }}</h6>
+    </div>
+    <div class="content">
+      <h3>{{selectedlanguage=='Arabic (عربي)' ? 'حالة الطلب':'Order Status'}}</h3>
+      <h6>{{ salesData.salesOrder.orderdStatus=='Ordered'?'Confirmed': salesData.salesOrder.orderdStatus}}</h6>
+    </div>
+  </div>
+
+
+  <div>
+    <!-- ORDER ITEMS WRAPPER -->
+    <div class="order-items-wrapper">
+      <div class="title">
+        <h3><i class="fa-solid fa-list"></i> {{selectedlanguage=='Arabic (عربي)' ? 'Ordered Items':'Ordered Items'}}
+        </h3>
+        <a href="javascript:void(0)">{{ salesData.orderItems.length }} {{selectedlanguage=='Arabic (عربي)' ?
+          'منتجات':'Items'}}</a>
+      </div>
+      <ul>
+        <li *ngFor="let itm of salesData.orderItems">
+          <div class="product-list-wrapper">
+            <div class="product-list-img">
+              <div class="img">
+                <img src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/Product-image/{{itm.itemId}}_0.png" alt="product" />
+              </div>
+            </div>
+            <div class="product-list-details">
+              <h4>{{ itm.itemDesc }}</h4>
+              <p>₹ {{ itm.pricePerMeas |number : '1.0-0' }}</p>
+              <!-- <h6>{{itm.weight}}</h6> -->
+            </div>
+          </div>
+          <div class="qty-view">{{ itm.quantityValue }}</div>
+        </li>
+      </ul>
+    </div>
+    <!-- TRACK ORDER -->
+    <div class="track-order-wrapper">
+      <div class="title">
+
+        <h3> <i class="fa-solid fa-timeline"></i> {{selectedlanguage=='Arabic (عربي)' ? 'ترتيب المسار':'Track Order'}}
+        </h3>
+      </div>
+
+      <div class="track-order-body">
+        <div class="order-track">
+          <!-- <div class="order-track-step complete">
+            <div class="order-track-status">
+              <span class="order-track-status-dot"></span>
+              <span class="order-track-status-line"></span>
+            </div>
+            <div class="order-track-text">
+              <p class="order-track-text-stat">
+                <b>{{selectedlanguage=='Arabic (عربي)' ? 'امر': 'Ordered' }} </b> on
+                {{
+                salesData.salesOrder.createdOn | date : "dd MMM yyyy hh:mm a"
+                }}
+              </p>
+              <span class="order-track-text-sub">{{selectedlanguage=='Arabic (عربي)' ? 'وقد وضعت طلبك':'Your order has been placed'}}</span>
+            </div>
+          </div> -->
+          <div class="order-track-step complete" *ngFor="let tr of salesData.orderTracking">
+            <div class="order-track-status">
+              <span class="order-track-status-dot" [ngStyle]="tr.stts_desc ==='Cancelled'?{'background-color':'#e32323'}:{'background-color':'#27BA50'}"></span>
+              <span class="order-track-status-line"></span>
+            </div>
+            <div class="order-track-text">
+              <p class="order-track-text-stat">
+                <b [ngStyle]="tr.stts_desc ==='Cancelled'?{'color':'#e32323'}:{'color':'#27BA50'}">{{ tr.stts_desc }}</b> on {{tr.createdDate | date : "dd MMM yyyy hh:mm a" }}
+              </p>
+              <span *ngIf="tr.stts_desc === 'Shipped'">AWB Number <i class="fa-solid fa-minus"></i></span>
+              <span class="order-track-text-sub">{{
+                tr.transactionRemark
+                }} <strong *ngIf="tr.stts_desc=='Delivered'">{{
+                  salesData.salesOrder.deliveryDate | date : "dd MMM yyyy hh:mm a"
+                  }}</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAYMENT DETAILS -->
+    <div class="payment-details-wrapper">
+      <h3><i class="fa-regular fa-credit-card"></i> {{selectedlanguage=='Arabic (عربي)' ? 'معلومات الدفع':'Payment Details'}}</h3>
+      <div class="col-12 payment-mode-status">
+        <div class="col-6">
+          <h6>{{selectedlanguage=='Arabic (عربي)' ? 'طريقة الدفع':'Payment Mode'}}</h6>
+          <h4>{{selectedlanguage=='Arabic (عربي)' ? 'طريقة عبر الإنترنت':'Online'}}</h4>
+        </div>
+        <div class="col-6">
+          <h6>{{selectedlanguage=='Arabic (عربي)' ? 'حالة المدفوعات':'Payment Status'}}</h6>
+          <h4>{{selectedlanguage=='Arabic (عربي)' ? 'مدفوع':'Paid'}}</h4>
+        </div>
+      </div>
+    </div>
+    <!-- ORDER SHIPPING DELIVERY  -->
+    <div class="order-shipping-delivery">
+      <h3><i class="fa-solid fa-truck-fast"></i>{{selectedlanguage=='Arabic (عربي)' ? 'عنوان الشحن':'Shipping Address'}}
+      </h3>
+      <p>
+        {{ salesData.salesOrder.roomNo }}
+        {{ salesData.salesOrder.buildingName }}
+        {{ salesData.salesOrder.sector }}
+        {{ salesData.salesOrder.locality }}
+        {{ salesData.salesOrder.city }}
+        {{ salesData.salesOrder.zipCode }}
+      </p>
+    </div>
+   
+  </div>
+ <!-- PRODUCT DETAILS -->
+ <div class="product-details">
+  <h3><i class="fa-solid fa-money-check-dollar"></i>{{selectedlanguage=='Arabic (عربي)' ? 'تفاصيل السعر':'Price Details'}}</h3>
+  <ul>
+    <li>
+      <b>{{selectedlanguage=='Arabic (عربي)' ? 'المجموع الفرعي':'Subtotal'}}</b>
+      <b>₹ {{ salesData.salesOrder.totalPrice | number : '1.0-0'}}</b>
+    </li>
+    <!-- <li>
+      <span>{{selectedlanguage=='Arabic (عربي)' ? 'ضريبة':'VAT Tax'}} ( {{salesData.salesOrder.vatTax}}%)</span>
+      <span>₹ {{ (salesData.salesOrder.totalPrice
+        *salesData.salesOrder.vatTax)/100 | number : '1.0-0'}}</span>
+    </li> -->
+    <li>
+      <span>{{selectedlanguage=='Arabic (عربي)' ? 'رسوم التوصيل':'Delivery charges'}}</span>
+      <span>{{salesData.salesOrder.totalPrice>150?'Free':selectedlanguage =='Arabic (عربي)' ?'﷼.32.00 ':'SAR 32.00'}}</span>
+    </li>
+    <li>
+      <span>{{selectedlanguage=='Arabic (عربي)' ? 'تخفيض':'Discount'}}</span>
+      <span>₹ {{ salesData.salesOrder.discount|number : '1.0-0'}}</span>
+    </li>
+    <li class="total">
+      <b>{{selectedlanguage=='Arabic (عربي)' ? 'المبلغ الإجمالي':'Total Amount'}} <p class="Inc-tax">(Inclusive of VAT {{salesData.salesOrder.vatTax}}%)</p></b>
+      <b>₹ {{ GrandTotal | number : '1.0-0'}}</b>
+    </li>
+  </ul>
+</div>
+
+  <div class="order-details-bottom">
+    <div class="order-bottom-bttn">
+      <button type="button" class="btn btn-dark" routerLink="/Order/contact-support/{{ createdby }}">
+        {{selectedlanguage=='Arabic (عربي)' ? 'اتصل بالدعم':'Contact support'}}
+      </button>
+      <button type="button"
+        class="btn btn-danger {{salesData.salesOrder.orderdStatus=='Cancelled'?'disabled':salesData.salesOrder.orderdStatus=='Delivered'?'disabled':salesData.salesOrder.orderdStatus=='Refused'?'disabled':''}}"
+        (click)="cancelOrderMd()">
+        {{selectedlanguage=='Arabic (عربي)' ? 'الغاء الطلب':'Cancel Order'}}
+      </button>
+    </div>
+  </div>
+</section>
+<!-- CANCEL ORDER MODAL -->
+<div class="modal fade show common-modal-md" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  [ngStyle]="changePasswordMD">
+  <div class="modal-dialog modal-dialog-centered modal-box" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel">
+          {{selectedlanguage=='Arabic (عربي)' ? 'الغاء الطلب؟':'Cancel Order?'}}
+        </h5>
+        <button type="button" class="btn btn-default close" data-dismiss="modal" aria-label="Close" (click)="closemd()">
+          <span aria-hidden="true"><i class="fa-solid fa-xmark"></i></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="content">
+          <h3>{{selectedlanguage=='Arabic (عربي)' ? 'هل أنت متأكد أنك تريد إلغاء طلبك؟':'Are you sure you want to cancel your order?'}}</h3>
+          <p>{{selectedlanguage=='Arabic (عربي)' ? 'ملاحظة: لا يمكنك التراجع عن التغييرات':'Note: You cannot undo the changes'}}</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="closemd()">
+          {{selectedlanguage=='Arabic (عربي)' ? 'لالغاء':'Cancel'}}
+        </button>
+        <button type="button" class="btn btn-danger" (click)="CancelOrder()">
+          {{selectedlanguage=='Arabic (عربي)' ? 'الغاء الطلب':'Cancel Order'}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

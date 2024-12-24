@@ -1,0 +1,92 @@
+<section class="edit-profile-section {{selectedlanguage =='Arabic (عربي)' ? 'left-to-right':''}}">
+    <div class="edit-profile-form">
+        <h3 style="font-weight: 700;margin: 12px 0;font-size: 18px;">Update your Profile</h3>
+        <div class="form-group mb-3">
+            <label class="label">Email:</label>
+            <input type="email" name="email" class="form-control" placeholder="Enter Email" [(ngModel)]="userdetails.email" disabled />
+        </div>
+        <form [formGroup]="details" (ngSubmit)="submitForm($event)">
+            <div class="form-group mb-3">
+                <label class="label">Name:</label>
+                <input type="text" name="fullName" class="form-control" placeholder="Enter Name"  formControlName="fullName"
+                [ngClass]="{ 'is-invalid': submitted && formData['fullName'].errors }" />
+            </div>
+            <!-- <div class="form-group mb-3">
+                <label class="label">Contact Number:</label>
+                <input type="number" name="phoneNumber" class="form-control" placeholder="Enter Contact Number" formControlName="phoneNumber" (keydown)="onContactchange()"/>
+            </div> -->
+            <div class="form-group mb-3">
+                <label class="label">Contact Number:</label>
+                <form #f="ngForm" [formGroup]="phoneForm">
+                <div class="wrapper">
+                    <ngx-intl-tel-input
+                    [cssClass]="'custom'" [preferredCountries]="preferredCountries" [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true" [customPlaceholder]="'Enter Contact Number'"
+                    [ngClass]="{ 'is-invalid': submitted && phoneformData['phone'].errors }"
+                    [searchCountryField]="[SearchCountryField.Iso2,SearchCountryField.Name]" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.India" [maxLength]="15" [phoneValidation]="true"
+                    [separateDialCode]="separateDialCode" [numberFormat]="PhoneNumberFormat.National" name="phone" formControlName="phone" (ngModelChange)="onContactchange()" (keyup)="onContactchange()">
+                    </ngx-intl-tel-input>
+                </div>
+                </form>
+            </div>
+            <div class="mb-1 text-right" [ngStyle]="isotpVerified ?{'display':'block'}:{'display':'none'}">Number Verified ! <img src="/assets/img/icons/verified.png"/></div>
+            <div class="form-group mb-1 text-right" [ngStyle]="isotpVerified ?{'display':'none'}:{'display':'block'}">
+                <button type="submit" class="btn btn-dark" name="sendOtpBtn">{{selectedlanguage =='Arabic (عربي)' ? 'التحقق من صحة رقم الاتصال':'Validate Number'}}</button>
+            </div>
+            <div class="form-group edit-profile-bttn mb-4" >
+                <button type="submit"  class="btn btn-dark w-100" [ngClass]="{'disabled':!isotpVerified}" name="showSuccessBtn">{{selectedlanguage =='Arabic (عربي)' ? 'إرسال':'Submit'}}</button>
+            </div>
+        </form>
+    </div>
+    <!-- ORDER CONFIRMATION TOAST  -->
+<div class="modal fade show payment-order-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" [ngStyle]="SuccesMD">
+    <div class="modal-dialog modal-dialog-centered modal-box" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+              <div class="content">
+                <i class="fa-solid fa-circle-check"></i>
+                <p>Your Profile has been updated successfully!</p>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark"(click)="ProceedToHome()">Ok</button>
+            </div>
+        </div>
+    </div>
+  </div>
+      <!-- VALIDATE CONTACT NUMBER MODAL-->
+<div class="modal fade show validate-contact-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" [ngStyle]="validateCM">
+    <div class="modal-dialog modal-dialog-centered modal-box" role="document">
+        <div class="modal-content">
+            <div class="modal-header-content">
+               <div>
+                <h3 class="modal-title fw-bold" id="exampleModalLabel">Verify your mobile number</h3>
+                <p class="modal-subtitle">We’ve sent an OTP code to your registered mobile number <b>{{ContactNumber}}</b></p>
+               </div>
+                <div (click)="closeVerifyModal()">
+                    <img src="/assets/img/icons/close.png" alt="icon">
+                </div>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-view">
+                        <div class="main-opt-input">
+                            <ng-otp-input class="otp-field" #ngOtpInput [config]="config" (onInputChange)="onOtpChange($event)" [ngClass]="{ 'is-invalid': isOtpVerification && otpErr}"></ng-otp-input>
+                        </div>
+                        <h6 class="text-danger">{{otpResErr}}</h6>
+                        <!-- <span>OTP will be valid for {{countDownTime}} secs </span> -->
+                        <!-- <h5>Didn’t receive the code? <a (click)="resendOtp()">Resend</a></h5> -->
+                       
+                    </div>
+                    <div class="form-group form-bttn py-4">
+                        <!-- [ngStyle]="isotpVerified ?{'display':'none'}:{'display':'block'}" -->
+                        <button type="button" class="btn btn-dark w-100" (click)="verifyBttn()" >VERIFY</button>
+                    </div>
+                    <!-- <div class="form-group form-bttn py-4" [ngStyle]="isotpVerified ?{'display':'block'}:{'display':'none'}">
+                        <button type="button" class="btn btn-success w-100">VERIFIED !</button>
+                    </div> -->
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
+</section>

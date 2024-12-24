@@ -1,0 +1,175 @@
+<section class="add-address-section">
+  <!-- ADD FORM WRAPPER -->
+  <div class="add-form-wrapper-patch">
+    <div class="add-form-wrapper">
+      <form [formGroup]="add_address" (ngSubmit)="AddAddress()">
+        <div class="row">
+          <div class="col-12">
+            <a class="input-group locate-me-input mb-3" href="/Locateme/{{backUrl}}/{{cartId}}">
+              <span class="input-group-text" id="basic-addon1">
+                <img src="/assets/img/icons/locate-me.png" alt>
+              </span>
+              <input type="text" class="form-control" placeholder="Locate Me">
+            </a>
+            <div class="divider mb-3"></div>
+          </div>
+          <div class="col-12">
+            <div class="input-group mb-3">
+              <input [(ngModel)]="fullname" [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }" type="text"
+                class="form-control" formControlName="firstName" placeholder="Enter Full Name" autocomplete="off">
+              <div *ngIf="
+                  submitted &&
+                  f['firstName'].errors &&
+                  editaddress.firstName == null
+                " class="invalid-feedback">
+                <div *ngIf="f['firstName'].errors['required']">FirstName is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="input-group mb-3">
+              <input [(ngModel)]="userdetails.email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+                type="text" class="form-control" formControlName="email" placeholder="Enter Email" autocomplete="off">
+              <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                <div *ngIf="f['email'].errors['required']">Email is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="input-group number-info mb-3">
+              <span class="question-info">
+                <i class="fa-solid fa-circle-question"></i>
+              </span>
+              <div class="question-info-msg">
+                In case we need to contact you about your order
+              </div>
+              <input [(ngModel)]="userdetails.phoneNumber"
+                [ngClass]="{ 'is-invalid': submitted && f['contact'].errors }" type="text" class="form-control"
+                formControlName="contact" placeholder="Enter Mobile Number" autocomplete="off">
+              <div *ngIf="submitted && f['contact'].errors" class="invalid-feedback">
+                <div *ngIf="f['contact'].errors['required']">Contact is required</div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="mb-3">
+                <a *ngIf="!altContact" (click)="addAltContact()" href="javascript:void(0)">
+                  + Add Alternate Phone Number
+                </a>
+              </div>
+            </div>
+            <div *ngIf="altContact" class="input-group mb-3">
+              <input type="text" class="form-control" formControlName="alternativeContact"
+                placeholder="Enter Alternate Mobile Number" autocomplete="off"
+                [ngClass]="{ 'is-invalid': submitted && f['alternativeContact'].errors }">
+              <!-- <div *ngIf="submitted && f['alternativeContact'].errors" class="invalid-feedback">
+                <div *ngIf="f['alternativeContact'].errors['pattern']">Enter Valid Contact Number</div>
+              </div> -->
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="input-group mb-3">
+              <select [value]="country" class="form-select" name="country" formControlName="country"
+                [ngClass]="{ 'is-invalid': submitted && f['country'].errors }">
+                <option value="" disabled>
+                  Select your Country
+                </option>
+                <option value="India">India</option>
+              </select>
+              <div *ngIf="submitted &&f['country'].errors" class="invalid-feedback">
+                <div *ngIf="f['country'].errors['required']">Please select Country</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="input-group textarea-group mb-3">
+              <textarea [(ngModel)]="street" [ngClass]="{ 'is-invalid': submitted && f['locality'].errors }"
+                class="form-control" placeholder="Street address" name="landmark" cols="30" rows="5"
+                formControlName="locality" autocomplete="off"></textarea>
+              <div *ngIf="submitted && f['locality'].errors" class="invalid-feedback">
+                <div *ngIf="f['locality'].errors['required']">Street Address is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="input-group mb-3 h-100 overflow-auto">
+              <select [value]="city" class="form-select" name="city" formControlName="city"
+                [ngClass]="{ 'is-invalid': submitted && f['city'].errors }">
+                <option value="" disabled>Select your city</option>
+                <option value="Al-Bahah">Al-Bahah</option>
+                <option value="Sakakah">Sakakah</option>
+                <option value="Buraidah">Buraidah</option>
+                <option value="Abha">Abha</option>
+                <option value="Dammam">Dammam</option>
+                <option value="Ha'il">Ha'il</option>
+                <option value="Jeddah">Jeddah</option>
+                <option value="Jizan">Jizan</option>
+                <option value="Medina">Medina</option>
+                <option value="Mecca">Mecca</option>
+                <option value="Najran">Najran</option>
+                <option value="'Ar'ar">'Ar'ar</option>
+                <option value="Riyadh">Riyadh</option>
+                <option value="Tabuk">Tabuk</option>
+              </select>
+              <div *ngIf="submitted &&f['city'].errors" class="invalid-feedback">
+                <div *ngIf="f['city'].errors['required']">Please select city</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="input-group mb-3">
+              <input [(ngModel)]="zipcode" [ngClass]="{ 'is-invalid': submitted && f['zipCode'].errors }" type="text"
+                class="form-control" placeholder="Enter zipCode" formControlName="zipCode" autocomplete="off">
+              <div *ngIf="submitted && f['zipCode'].errors" class="invalid-feedback">
+                <div *ngIf="f['zipCode'].errors['required']">ZipCode is required</div>
+                <div *ngIf="f['zipCode'].errors['minlength']">ZipCode must be at least 5 characters</div>
+                <div></div>
+                <div *ngIf="f['zipCode'].errors['maxlength']">ZipCode must not exceed 9 characters</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="mb-3">
+              <a *ngIf="!Landmark" (click)="addLandmark()" href="javascript:void(0)">
+                + Add Landmark
+              </a>
+            </div>
+            <div class="input-group mb-3">
+              <input *ngIf="Landmark" type="text" class="form-control" formControlName="landmark"
+                placeholder="Enter Landmark" autocomplete="off">
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="home-office-bttn">
+              <h3 class="mb-0">Type of address</h3>
+              <div class="type">
+                <div class="check-status mt-2 mr-2">
+                  <input type="radio" class="btn-check se" name="addressType" id="success-outlined" value="home"
+                    formControlName="addressType" autocomplete="off">
+                  <label class="btn btn-outline-dark" for="success-outlined">
+                    Home
+                  </label>
+                </div>
+                <div class="check-status mt-2">
+                  <input type="radio" class="btn-check" name="addressType" formControlName="addressType" value="office"
+                    id="danger-outlined" autocomplete="off">
+                  <label class="btn btn-outline-dark" for="danger-outlined">
+                    Office
+                  </label>
+                </div>
+                <div *ngIf="submitted && add_address.controls['addressType'].errors?.['required']"
+                  class="invalid-feedback">
+                  Please select either value
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 add-save-btn">
+            <button type="submit" class="btn btn-dark">
+              Save Address
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,38 @@
+.select-language-section {
+    padding-bottom: 50px;
+
+    .language-select {
+        padding: 20px;
+        .form-group {
+            label {
+                color: #444444;
+                font-weight: 400;
+                font-size: 12px;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}
+
+/* TABLET VIEW MEDIA QUERY */
+@media only screen and (max-width: 768px) {
+    .select-language-section {
+        width: 100%;
+        box-shadow: none;
+    }
+}
+
+@media only screen and (max-width: 1024px) { 
+    .select-language-section {
+        width: 100%;
+        box-shadow: none;
+    }
+}
+
+/* MOBILE VIEW MEDIA QUERY */
+@media only screen and (max-width: 480px) {
+    .select-language-section {
+        width: 100%;
+        box-shadow: none
+    }
+}

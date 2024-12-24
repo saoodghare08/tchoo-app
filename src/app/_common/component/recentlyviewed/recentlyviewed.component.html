@@ -1,0 +1,37 @@
+<div *ngIf="getViewedProducts != 0 && createdBy !=0"
+	class="cart-product-wrapper {{selectedlanguage =='Arabic (عربي)' ? 'left-to-right':''}}">
+	<div class="page-common-header pb-0 pt-0">
+		<div>
+			<h2>
+				{{selectedlanguage =='Arabic (عربي)' ? 'شوهدت مؤخرا':'Recently viewed'}}
+			</h2>
+		</div>
+		<div>
+			<a href="/recentview/{{createdBy}}/{{HubId}}">
+				{{selectedlanguage =='Arabic (عربي)' ? 'اظهار الكل' :'See all'}}
+			</a>
+		</div>
+	</div>
+	<!-- COMMON CUSTOM SLIDER -->
+	<div class="common-custom-slider recently-view-card">
+		<div *ngFor="let item of getViewedProducts" class="common-card-box no-add-bttn">
+			<div class="special-offer-badge" *ngIf="item.offers?.length == 1"><span>{{(((item.manufracture-item.sellingPrice)/item.manufracture)*100) | number : '1.0-0'}}% OFF</span></div>
+			<div class="top-img">
+				<div class="card-img">
+					<a
+						href="/Main-Category/SubCategory/Category/Products/{{item.itemId}}/{{item.mainCategory}}/{{createdBy}}/{{HubId}}/asc/0/0">
+						<!-- <img src="{{item.imagePath}}" alt="product"> -->
+            <img src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/Product-image/{{item.itemId}}_0.png" alt="img"
+                onerror="this.src='assets/img/category/no-image.png';">
+					</a>
+				</div>
+			</div>
+			<div class="card-bottom">
+				<div class="card-content">
+					<a href="/Main-Category/SubCategory/Category/Products/{{item.itemId}}/{{item.mainCategory}}/{{createdBy}}/{{HubId}}/asc/0/0"><h3>{{item.pluName}}</h3></a>
+					<p>₹ {{item.sellingPrice}} <span class="offer-amount" *ngIf="item.offers?.length == 1">{{item.manufracture}}</span></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

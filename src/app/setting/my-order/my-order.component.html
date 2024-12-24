@@ -1,0 +1,71 @@
+<section class="my-order-section {{selectedlanguage =='Arabic (عربي)' ? 'left-to-right':''}}">
+  <!-- MY ORDER WRAPPER -->
+  <div class="my-order-wrapper">
+    <div class="my-order-list" *ngFor="let itm of Orders">
+      <div class="my-order-list-header">
+        <div>
+          <span>Order ID : <b> #{{ itm.salesId }}</b></span>
+        </div>
+        <div>
+          <span> {{ itm.createdOn | date : "dd MMM yyyy hh:mm a" }}</span>
+        </div>
+      </div>
+      <div class="my-order-list-body">
+        <div class="content">
+          <div class="top" *ngIf="itm.orderdStatus == 'Delivered'">
+            <h3>{{selectedlanguage =='Arabic (عربي)' ? 'تاريخ تسليمها':'Delivered on'}} {{ itm.deliveryDate | date : "dd MMM yyyy" }}</h3>
+          </div>
+          <div class="top-cancelled" *ngIf="itm.orderdStatus == 'Cancelled'">
+            <h3>{{selectedlanguage =='Arabic (عربي)' ? 'تاريخ ملغى':'Cancelled on'}} {{ itm.deliveryDate | date : "dd MMM yyyy" }}</h3>
+          </div>
+          <div class="middle">
+            <h4> {{selectedlanguage =='Arabic (عربي)' ? 'المبلغ الإجمالي':'TOTAL AMOUNT'}} : <b> {{selectedlanguage
+                =='Arabic (عربي)' ? '﷼.':'₹'}} {{ orderTotal(itm.totalPrice,itm.discount) | number :'1.0-0' }}</b>
+            </h4>
+          </div>
+          <div class="middle">
+            <h4>{{selectedlanguage =='Arabic (عربي)' ? 'الكمية':'Qty'}} : <b>{{ itm.quantityValue}}</b>
+            </h4>
+          </div>
+          <div class="bottom">
+            <a class="details-view"
+              routerLink="/Setting/MyOrder/Detail/{{ itm.salesId }}/{{createdby}}/{{HubId}}">{{selectedlanguage
+              =='Arabic (عربي)' ? 'تفاصيل':'Details'}} </a>
+
+            <h5 class="orange" *ngIf="itm.orderdStatus == 'Ordered'">
+              <i class="fa-solid fa-store"></i>
+              <span>{{selectedlanguage =='Arabic (عربي)' ? 'امر':'Ordered'}} </span>
+            </h5>
+            <h5 class="green" *ngIf="itm.orderdStatus == 'Delivered'">
+              <i class="fa-solid fa-check"></i>
+              <span>{{selectedlanguage =='Arabic (عربي)' ? 'تم التوصيل':'Delivered'}}</span>
+            </h5>
+            <h5 class="yellow" *ngIf="itm.orderdStatus == 'Shipped'">
+              <i class="fa-solid fa-truck-fast"></i>
+              <span>{{selectedlanguage =='Arabic (عربي)' ? 'شحنها':'Shipped'}}</span>
+            </h5>
+            <h5 class="red" *ngIf="itm.orderdStatus == 'Cancelled'">
+              <i class="fa-sharp fa-regular fa-circle-xmark"></i>
+              <span>{{selectedlanguage =='Arabic (عربي)' ? 'ألغيت':'Cancelled'}}</span>
+            </h5>
+            <h5 class="red" *ngIf="itm.orderdStatus == 'Refused'">
+              <i class="fa-sharp fa-regular fa-circle-xmark"></i>
+              <span>{{selectedlanguage =='Arabic (عربي)' ? 'رفض':'Refused'}}</span>
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-empty-state" *ngIf="Orders?.length == 0 || null">
+    <div class="empty-img">
+      <img src="/assets/img/empty-state/empty-state.png" alt="empty" />
+    </div>
+    <div class="empty-state-content">
+      <h2>{{selectedlanguage =='Arabic (عربي)' ?'لا توجد طلبات حتى الآن':'No orders yet'}}</h2>
+      <a href="/Home/{{createdby}}">{{selectedlanguage =='Arabic (عربي)' ?'أضف المزيد':'Add more'}}</a>
+    </div>
+  </div>
+</section>
+<!-- BOTTOM LAYOUT -->
+<!-- <app-bottom-layout></app-bottom-layout> -->

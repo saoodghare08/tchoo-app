@@ -1,0 +1,148 @@
+.save-address-section {
+    padding-bottom: 50px;
+    /* ADD A NEW ADDRESS */
+    .add-new-address-wrapper {
+        padding: 20px;
+        margin-bottom: 30px;
+        background-color: #ffffff;
+        border-top: 1px solid #f1f1f1;
+        a {
+            color: #2472CD;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+    }
+
+    /* SAVE ADDRESS LIST WRAPPER */
+    .save-address-wrapper {
+        .save-address-list {
+            padding: 20px 15px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            &:last-child {
+                margin-bottom: 0;
+            }
+            .top {
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+                justify-content: space-between;
+                h3 {
+                    color: #000000;
+                    font-weight: 500;
+                    font-size: 16px;
+                    span {
+                        color: #222222;
+                        padding: 1px 5px;
+                        border-radius: 8px;
+                        font-size: 10px;
+                        margin-left: 5px;
+                        display: inline-block;
+                        vertical-align: middle;
+                        background-color: #d3d3d3;
+                        border: 1px solid #ffffff;
+                    }
+                }
+
+                .default {
+                    color: #999999;
+                    font-size: 12px;
+                    margin-right: 5px;
+                }
+                .dropdown-toggle {
+                    color: #000000;
+                    padding: 5px;
+                    background-color: transparent;
+                    border: 0;
+                    i{
+                        font-size: 20px;
+                    }
+
+                    &::after {
+                        display: none;
+                    }
+                }
+
+
+                .save-address-action {
+                  display: flex;
+                  align-items: center;
+                  a {
+                      color: #666666;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      padding: 0 5px;
+                      &:last-child {
+                        padding-right: 0;
+                      }
+
+                      &:hover {
+                        color: #020202;
+                      }
+
+                      &.trash-icon {
+                        &:hover {
+                          color: #db3333;
+                        }
+                      }
+                      h5{
+                        padding: 1px 5px;
+                        border-radius: 8px;
+                        border: 1px solid #000000;
+                      }
+                  }
+                }
+            }
+
+            .content {
+                p {
+                    color: #444444;
+                    font-size: 14px;
+                    line-height: 21px;
+                    margin-bottom: 10px;
+                }
+
+                h6 {
+                    color: #444444;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+
+    .no-address-added {
+        color: #a7a2a2;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        text-align: center;
+        font-size: 16px;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+    }
+}
+
+/* TABLET VIEW MEDIA QUERY */
+@media only screen and (max-width: 768px) {
+    .save-address-section {
+        width: 100%;
+        box-shadow: none;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .save-address-section {
+        width: 100%;
+        box-shadow: none;
+    }
+}
+
+/* MOBILE VIEW MEDIA QUERY */
+@media only screen and (max-width: 480px) {
+    .save-address-section {
+        width: 100%;
+        box-shadow: none
+    }
+}

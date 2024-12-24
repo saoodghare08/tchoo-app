@@ -1,0 +1,31 @@
+.placeholder-loader {
+    height: 100%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    .common-loader-wrapper {
+        .common-loader {
+            text-align: center;
+    
+            .sns-logo {
+                img {
+                    width: 80%;
+                }   
+            }
+            .gif-loader {
+                width: 25px;
+                height: 25px;
+                object-fit: contain;
+                margin-right: 10px;
+            }
+    
+            span {
+                color: #000000;
+                font-weight: 400;
+                font-size: 14px;
+            }
+        }
+    }
+}

@@ -1,0 +1,56 @@
+<section class="category-page {{selectedlanguage =='Arabic (عربي)' ? 'left-to-right':''}}">
+  <!-- USER TITLE -->
+  <div class="user-title">
+    <div class="d-flex align-items-center justify-content-between">
+      <div class="title">
+        <div>
+          <h3>
+            <a class="back-page" (click)="backNavigation()"> <img src="/assets/img/icons/back-arrow.svg" alt="arrow">
+              <span>Category</span>
+            </a>
+          </h3>
+        </div>
+      </div>
+      <div class="card-status" *ngIf="createdBy !=0">
+        <a href="/MyCart/{{createdBy}}/{{HubId}}">
+          <span class="card-count">{{mycart?.length}}</span>
+          <img src="/assets/img/icons/shopping-cart.svg" alt="search" />
+        </a>
+      </div>
+    </div>
+    <!-- COMMON SEARCH BOX -->
+    <div class="common-search-box">
+      <div class="common-search-input">
+        <form (ngSubmit)="search()">
+          <img src="/assets/img/icons/search.png" class="search-icon" alt="search" />
+          <input type="text" placeholder="Search Product" name="searchValue" id="searchValue"
+            [(ngModel)]="searchValue" />
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- PAGE COMMON WRAPPER -->
+  <div class="page-common-wrapper">
+    <div class="category-list-wrapper">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4 col-6 col-lg-2" *ngFor="let category of maincategory"
+            (click)="getcategory(category.mainCategoryId)">
+            <div class="common-card card">
+              <div class="top card-body">
+                <img
+                  src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/category-images/{{category.mainCategoryId}}.png"
+                  onerror="this.onerror=null; this.src='assets/img/category/no-image.png'" alt="category" />
+              </div>
+              <div class="bottom card-content">
+                <h3 class="text-center">{{category.name}}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- BOTTOM LAYOUT -->
+<!-- <app-bottom-layout></app-bottom-layout> -->

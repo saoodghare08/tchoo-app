@@ -1,0 +1,93 @@
+<section class="account-list-section {{selectedlanguage =='Arabic (عربي)' ? 'left-to-right':''}}" >
+    <!-- ACCOUNT LIST HEADER -->
+    <div class="account-list-header">
+        <div class="content">
+            <h4>{{selectedlanguage =='Arabic (عربي)' ? 'أهلاً':'Hello,'}}</h4>
+            <h5>{{fullname}}</h5>
+        </div>
+    </div>
+    <!-- ACCOUNT LISY BODY -->
+    <div class="account-list-body">
+        <h3>{{selectedlanguage =='Arabic (عربي)' ? 'إعدادت الحساب':'Account Settings'}}</h3>
+        <ul>
+            <li>
+                <a href="/Setting/MyOrder/{{createdby}}/{{HubId}}">
+                    <i class="fa-solid fa-cube"></i>
+                    <span>{{selectedlanguage =='Arabic (عربي)' ? 'طلبي':'My Orders'}}</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Wish-list/{{createdby}}/{{HubId}}">
+                    <i class="fa-solid fa-heart"></i>
+                    <span>{{selectedlanguage =='Arabic (عربي)' ? 'قائمة امنياتي':'My Wishlist'}}</span>
+                </a>
+            </li>
+            <li>
+                <a href="/offers/{{createdby}}/{{HubId}}">
+                    <i class="fa-solid fa-tag"></i>
+                    <span>{{selectedlanguage =='Arabic (عربي)' ? 'عروض':'Offers'}}</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Setting/EditProfile/{{createdby}}/{{HubId}}">
+                    <i class="fa-solid fa-user-pen"></i>
+                    <span>{{selectedlanguage =='Arabic (عربي)' ? 'تعديل الملف الشخصي':'Edit Profile'}}</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Setting/SaveAddress/{{createdby}}/{{HubId}}">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>{{selectedlanguage =='Arabic (عربي)' ? 'العناوين المحفوظة':'Saved Addresses'}}</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Setting/SelectLanguage/{{createdby}}/{{HubId}}">
+                    <i class="fa-solid fa-language"></i>
+                    <span>{{selectedlanguage =='Arabic (عربي)' ? 'تغيير اللغة':'Select Language'}}</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Notifications/{{createdby}}/{{HubId}}">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>{{selectedlanguage =='Arabic (عربي)' ? 'الإخطارات':'Notifications'}}</span>
+                </a>
+            </li>
+        </ul>
+        <h3 class="mt-4">{{selectedlanguage =='Arabic (عربي)' ? 'ردود الفعل والمعلومات':'Feedback & Information'}}</h3>
+        <ul>
+            <li>
+                <a href="/privacy">
+                    <i class="fa-solid fa-book"></i>
+                    <span>{{selectedlanguage =='Arabic (عربي)' ? 'سياسة الخصوصية':'Privacy policy'}}</span>
+                </a>
+            </li>
+            <li>
+                <a href="/TOS">
+                    <i class="fa-solid fa-file-circle-check"></i>
+                    <span>{{selectedlanguage =='Arabic (عربي)' ? 'شروط الخدمة':'Terms of service'}}</span>
+                </a>
+            </li>
+            <li>
+                <a href="/RefundPolicy">
+                    <i class="fa-solid fa-money-check-dollar"></i>
+                    <span>{{selectedlanguage =='Arabic (عربي)' ? 'سياسة الاسترجاع':'Refund policy'}}</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Order/contact-support/{{createdby}}">
+                    <i class="fa-solid fa-handshake-angle"></i>
+                    <span>{{selectedlanguage =='Arabic (عربي)' ? 'مركز المساعدة':'Help Center'}}</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="javascript:void(0)" class="text-danger">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>{{selectedlanguage =='Arabic (عربي)' ? 'تسجيل خروج':'Log Out'}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
+<!-- BOTTOM LAYOUT -->
+<!-- <app-bottom-layout></app-bottom-layout> -->

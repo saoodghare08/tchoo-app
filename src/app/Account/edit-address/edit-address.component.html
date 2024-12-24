@@ -1,0 +1,146 @@
+<section class="add-address-section">
+  <!-- ADD FORM WRAPPER -->
+  <div class="add-form-wrapper-patch">
+    <div class="add-form-wrapper">
+      <form [formGroup]="add_address" (ngSubmit)="EditAddress()">
+        <div class="row">
+          <div class="col-12">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" formControlName="firstName" [(ngModel)]="editaddress.firstName"
+                placeholder="Enter Full Name" [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }"
+                autocomplete="off" />
+              <div *ngIf="submitted && f['firstName'].errors && editaddress.firstName==null " class="invalid-feedback">
+                <div *ngIf="f['firstName'].errors['required']">FirstName is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" formControlName="email" [(ngModel)]="editaddress.email"
+                placeholder="Enter Email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+                autocomplete="off" />
+              <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                <div *ngIf="f['email'].errors['required']">Email is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" formControlName="contact" [(ngModel)]="editaddress.contact"
+                placeholder="Enter Mobile Number" [ngClass]="{ 'is-invalid': submitted && f['contact'].errors }"
+                autocomplete="off" />
+              <div *ngIf="submitted && f['contact'].errors" class="invalid-feedback">
+                <div *ngIf="f['contact'].errors['required']">Contact is required</div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="mb-3" *ngIf="!editaddress.alternativeContact && !altContact" (click)="addAltContact()">
+                <a href="javascript:void(0)">+ Add Alternate Phone Number</a>
+              </div>
+            </div>
+            <div class="input-group mb-3" *ngIf="editaddress.alternativeContact || altContact">
+              <input type="text" class="form-control" formControlName="alternativeContact"
+                [(ngModel)]="editaddress.alternativeContact " placeholder="Enter alternate Contact Number"
+                autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f['alternativeContact'].errors }" />
+              <!-- <div *ngIf="submitted && f['alternativeContact'].errors" class="invalid-feedback">
+                    <div *ngIf="f['alternativeContact'].errors['pattern']">Enter Valid Contact Number</div>
+                  </div> -->
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="input-group mb-3">
+              <select class="form-control" name="country" [(ngModel)]="editaddress.country" formControlName="country"
+                [ngClass]="{ 'is-invalid': submitted && f['country'].errors }">
+                <option value="" disabled>Select your state</option>
+                <option value="India">India</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="input-group textarea-group mb-3">
+              <textarea class="form-control" placeholder="Street address" name="landmark" cols="30" rows="5"
+                formControlName="locality" [(ngModel)]="editaddress.locality"
+                [ngClass]="{ 'is-invalid': submitted && f['locality'].errors }" autocomplete="off">
+              </textarea>
+              <div *ngIf="submitted && f['locality'].errors" class="invalid-feedback">
+                <div *ngIf="f['locality'].errors['required']">Street Address is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="input-group mb-3 h-100 overflow-auto">
+              <select [(ngModel)]="editaddress.city" class="form-select" name="city" formControlName="city"
+                [ngClass]="{ 'is-invalid': submitted && f['city'].errors }">
+                <option value="" disabled>Select your city</option>
+                <option value="Al-Bahah">Al-Bahah</option>
+                <option value="Sakakah">Sakakah</option>
+                <option value="Buraidah">Buraidah</option>
+                <option value="Abha">Abha</option>
+                <option value="Dammam">Dammam</option>
+                <option value="Ha'il">Ha'il</option>
+                <option value="Jeddah">Jeddah</option>
+                <option value="Jizan">Jizan</option>
+                <option value="Medina">Medina</option>
+                <option value="Mecca">Mecca</option>
+                <option value="Najran">Najran</option>
+                <option value="'Ar'ar">'Ar'ar</option>
+                <option value="Riyadh">Riyadh</option>
+                <option value="Tabuk">Tabuk</option>
+              </select>
+              <div *ngIf="submitted &&f['city'].errors" class="invalid-feedback">
+                <div *ngIf="f['city'].errors['required']">Please select city</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Enter zipCode" formControlName="zipCode"
+                [(ngModel)]="editaddress.zipCode" [ngClass]="{ 'is-invalid': submitted && f['zipCode'].errors }"
+                autocomplete="off" />
+              <div *ngIf="submitted && f['zipCode'].errors" class="invalid-feedback">
+                <div *ngIf="f['zipCode'].errors['required']">ZipCode is required</div>
+                <div *ngIf="f['zipCode'].errors['minlength']">
+                  ZipCode must be at least 5 characters
+                </div>
+                <div *ngIf="f['zipCode'].errors['maxlength']">
+                  ZipCode must not exceed 9 characters
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="mb-3">
+              <a *ngIf="!editaddress.landmark  && !Landmark" (click)="addLandmark()" href="javascript:void(0)">
+                + Add Landmark
+              </a>
+            </div>
+          </div>
+          <div class="input-group mb-3" *ngIf="editaddress.landmark || Landmark">
+            <input type="text" class="form-control" formControlName="landmark" [(ngModel)]="editaddress.landmark"
+              placeholder="Enter Landmark" autocomplete="off" />
+          </div>
+          <div class="col-12">
+            <div class="home-office-bttn">
+              <h3>Type of address</h3>
+              <div class="type">
+                <div class="col-4 mt-2">
+                  <input type="radio" class="btn-check" name="addressType" id="success-outlined" value="home"
+                    formControlName="addressType" autocomplete="off" checked [(ngModel)]="editaddress.addressType" />
+                  <label class="btn btn-outline-dark" for="success-outlined">Home</label>
+                </div>
+                <div class="col-4 mt-2">
+                  <input type="radio" class="btn-check" name="addressType" formControlName="addressType" value="office"
+                    id="danger-outlined" autocomplete="off" />
+                  <label class="btn btn-outline-dark" for="danger-outlined">Office</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 add-save-btn">
+            <button type="submit" class="btn btn-dark">Save Address</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
