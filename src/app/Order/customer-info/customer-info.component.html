@@ -65,7 +65,7 @@
                 <input type="text" name="discount" formControlName="coupon_Code" class="form-control"
                   placeholder="Discount Code" />
                 <div class="input-group-prepend">
-                  <button class="btn btn-dark py-2 apply-bttns" style="height: 50px;" type="submit">Apply</button>
+                  <button class="btn  py-2 apply-bttns" style="height: 50px; background-color: #00525b;color: white; " type="submit">Apply</button>
                 </div>
               </div>
             </form>
@@ -145,7 +145,7 @@
         <!-- <button type="button" *ngIf="Hub!= null && grandTotalAmount>Hub?.amountLimit" class="btn btn-dark" (click)="Step1()">
           {{selectedlanguage =='Arabic (عربي)' ?'يستمر الشحن':' Continue'}}
          </button> -->
-        <button type="button" class="btn btn-dark" (click)="Step1()" [ngClass]="{'disabled':addlist == undefined || addlist?.length==0}">
+        <button type="button" class="btn" style="background-color: #00525b; color: white;" (click)="Step1()" [ngClass]="{'disabled':addlist == undefined || addlist?.length==0}">
           {{selectedlanguage =='Arabic (عربي)' ?'يستمر':' Continue'}}
         </button>
       </div>
@@ -236,17 +236,13 @@
   </div>
   <!-- MODAL BODY -->
   <div class="modal-body">
-    <div class="payment-bttn" *ngIf="device.os != 'Android'">
-      <button type="button" class="btn btn-default" (click)="payment('ApplePay')"><img
-          src="/assets/img/payment/apple.svg" alt="icon" /> Apple Pay</button>
-    </div>
+    <!-- <div class="payment-bttn" *ngIf="device.os != 'Android'">
+      <button type="button" class="btn btn-default phonepe-bttn" (click)="payment('Razorpay')" style="color: #072654;">
+        <img src="/assets/img/payment/R1.png" alt="icon" width="40" /> <span>Razorpay</span></button>
+    </div> -->
     <div class="payment-bttn">
-      <button type="button" class="btn btn-default" (click)="payment('VISA')"><img src="/assets/img/payment/visa.svg"
-          alt="icon" /> Card Payment</button>
-    </div>
-    <div class="payment-bttn">
-      <button type="button" class="btn btn-default" (click)="payment('MADA')"><img src="/assets/img/payment/mada.svg"
-          alt="icon" /> Mada Pay</button>
+      <button type="button" class="btn btn-default" (click)="payment('COD')">
+          COD</button>
     </div>
   </div>
 </div>

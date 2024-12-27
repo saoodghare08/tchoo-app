@@ -101,7 +101,7 @@ body {
     }
 
     .mat-mdc-simple-snack-bar {
-        background-color: #000000;
+        background-color: #00525b;
         color: #ffffff;
         font-size: medium;
         font-weight: 200;
@@ -449,7 +449,7 @@ body {
                         &.slick-active {
                             button {
                                 padding: 0;
-                                background-color: #BD3225;
+                                background-color: #5a8e94;
                             }
                         }
                     }
@@ -645,7 +645,7 @@ body {
 
                     .step-counter {
                         color: #ffffff;
-                        background-color: #2472CD;
+                        background-color: #00525b;
                         border-color: #2472CD;
                     }
 
@@ -657,9 +657,9 @@ body {
 
                 &.completed {
                     .step-counter {
-                        color: #2472CD;
+                        color: #00525b;
                         background-color: #d3e7ff;
-                        border-color: #2472CD;
+                        border-color: #00525b;
 
                         i {
                             font-size: 16px;
@@ -779,7 +779,7 @@ body {
             margin-top: 20px;
 
             h2 {
-                color: #222222;
+                color: #001a2a;
                 font-weight: 500;
                 font-size: 18px;
                 line-height: 27px;
@@ -802,7 +802,7 @@ body {
                 padding: 10px 25px;
                 border-radius: 5px;
                 display: inline-block;
-                background: linear-gradient(0deg, #222222, #222222), #FFFFFF;
+                background: linear-gradient(0deg, #00525b, #00525b), #FFFFFF;
                 box-shadow: 4px 4px 13px rgba(34, 34, 34, 0.2);
             }
         }
@@ -816,14 +816,14 @@ body {
             padding: 5px 8px;
             display: block;
             text-align: center;
-            border: 1px solid #222222;
+            border: 1px solid #00525b;
             border-radius: 4px;
             width: 100%;
             background-color: transparent;
 
             &:hover {
                 color: #ffffff;
-                background-color: #222222;
+                background-color: #00525b;
             }
 
             &.added-bttn {

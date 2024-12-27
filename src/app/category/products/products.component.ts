@@ -449,7 +449,6 @@ displayImagArray:any=[]
 
   // buy now the particular select product or variant
   BuyNow() {
-    debugger
     if (this.createdBy == '0') {
       this.returnurl = '/SignIn/Goback'
       window.location.href = this.returnurl;
@@ -465,7 +464,6 @@ displayImagArray:any=[]
         this.productdetails.value.sellingPrice = this.selectedPrice;
         this.product_service.addtoCart(this.productdetails.value).subscribe({
           next: (data) => {
-            debugger
             this.cart = data;
             this.cartId = this.cart[0].id;
             if (this.addlist.length === 0) {

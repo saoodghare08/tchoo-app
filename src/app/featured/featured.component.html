@@ -47,7 +47,7 @@
               <div class="card-img">
                 <a class="category-card"
                   href="Main-Category/SubCategory/Category/Products/{{item.itemId}}/{{item.mainCategory}}/{{createdBy}}/{{HubId}}/asc/0/0">
-                  <img src="{{item.imagePath}}" alt="item" />
+                  <img src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/Product-image/{{item.itemId}}_0.png" alt="item" />
                 </a>
               </div>
           </div>
@@ -107,7 +107,7 @@
               <i class="fa-solid fa-circle-check active-check" *ngIf="v.ishubMap == 'true'"></i>
               <div class="variant-name"  *ngIf="!v.displayWithImg">{{ v.size }} {{ (v.measurement =='NOVAR' || 'Ut') ? '' : v.measurement }}
               </div>
-              <img  *ngIf="v.displayWithImg" src="{{v.imagePath}}" onerror="this.onerror=null; this.src='assets/img/category/no-image.png'"
+              <img  *ngIf="v.displayWithImg" src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/Product-image/{{v.itemId}}_0.png" onerror="this.onerror=null; this.src='assets/img/category/no-image.png'"
                   alt="variants">
             </div>
             <h3>{{ v.size }}</h3>
