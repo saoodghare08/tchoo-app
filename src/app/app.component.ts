@@ -67,7 +67,8 @@ export class AppComponent implements OnInit {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       duration: 3000,
-      panelClass: ['warning']
+      panelClass: ['warning'],
+    
     });
   }
   showSnackbarCssStyles(content: any, action: any, duration: any) {

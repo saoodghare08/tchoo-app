@@ -9,6 +9,7 @@ import { MyCartDTOs } from 'src/app/_common/DTOs/Order/MyCartDTOs';
 import { OrderService } from 'src/app/_services/orders/order.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
+declare var Razorpay:any;
 @Component({
   selector: 'app-customer-info',
   templateUrl: './customer-info.component.html',
@@ -42,7 +43,6 @@ export class CustomerInfoComponent implements OnInit {
   Discount: any;
   selectedCouponId: any;
   DiscountPercent: any;
-  
   filteredArray: any = []
   addlist: any = [];
   Hub: any = [];
@@ -301,17 +301,69 @@ export class CustomerInfoComponent implements OnInit {
       }
     })
   }
+
+
+
   payment(method: any) {
+    debugger;
     this.app.commonLoader = true;
-    if (this.addlist != 0) {
-      this.addId = this.selectedAdd ? this.selectedAdd : this.defaultadd.addId
-      window.location.href = '/Order/PlaceOrder/' + this.createdby + '/' + this.cartId + '/' + this.addId + '/SO-' + this.OrderId.retVal + '/' + this.HubId + '/' + this.deliveryCharge + '/' + (this.selectedCouponId ? this.selectedCouponId : 0) + '/' + method;
+  
+    if (method === "Razorpay") {
+      const razorpayOptions = {
+        description: 'Sample Razorpay',
+        currency: 'INR',
+        amount: '30000', // Amount in smallest currency unit
+        name: 'Prachi',
+        key: 'rzp_test_ZwkOzbBdtSVK61',
+        prefill: {
+          name: 'Prachi Raut',
+          email: 'prachiraut446@gmail.com',
+          phone: '7666275213',
+        },
+        theme: {
+          color: '#f37254',
+        },
+        modal: {
+          ondismiss: () => {
+            console.log('Payment dismissed');
+          },
+        },
+      };
+  
+      const successCallback = (paymentId: any) => {
+        console.log('Payment successful:', paymentId);
+        this.app.openSnackBar('Order has been placed successfully with Razorpay!');
+        this.app.commonLoader = false;
+  
+        // Navigate to success page
+        window.location.href = `Home/${this.createdby}`;
+
+      };
+  
+      const failureCallback = (error: any) => {
+        console.log('Payment failed:', error);
+        this.app.openSnackBar('Payment failed. Please try again.');
+        this.app.commonLoader = false;
+  
+        // Navigate to retry or error page
+        window.location.href = 'Order/CustomerInfo/ce7cf46a-bfa1-4ebe-9248-ea2de92f38dc/0/HID01';
+      };
+  
+      Razorpay.open(razorpayOptions, successCallback, failureCallback);
+    } else if (method === "COD") {
+      // Cash on Delivery scenario
+      this.app.openSnackBar('Order has been placed successfully with COD!');
+      this.app.commonLoader = false;
+  
+      // Navigate to success page or COD-specific page
+      window.location.href = `Home/${this.createdby}`;
+
+    } else {
+      this.app.openSnackBar('Please select a valid payment method.');
+      this.app.commonLoader = false;
     }
-    else {
-      this.app.openSnackBar('Add Address');
-    }
-    this.app.commonLoader = false;
   }
+  
   // select address pop up open
   showSelectAddressMd() {
     this.changeAddressopen = true;

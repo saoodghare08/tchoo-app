@@ -72,7 +72,6 @@ export class SignInComponent {
     })
   }
   login() {
-    debugger
     this.app.commonLoader = true;
     this.http.post(this.Url, this.model).subscribe({
       next: (data) => {
