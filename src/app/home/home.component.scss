@@ -146,10 +146,10 @@
                 margin-bottom: 0;
                 margin-top: 0;
 
-                &.slick-current,
-                &.slick-center {
-                    padding: 5px 0px;
-                }
+                // &.slick-current,
+                // &.slick-center {
+                //     padding: 5px 0px;
+                // }
 
                 .banner-img {
                     height: 160px;
@@ -176,11 +176,7 @@
                         }
                     }
                 }
-               
-
             }
-
-
         }
 
         &.sub-banner {
@@ -189,16 +185,13 @@
             padding-top: 2px;
         }
     }
+
  /* BANNER SLIDER WRAPPER */
- 
 
 
     /* PAGE COMMON WRAPPER */
     .page-common-wrapper {
         overflow-x: hidden;
-
-
-
         /* PAGE COMMON HEADER */
         .page-common-header {
             display: flex;
@@ -734,10 +727,7 @@
         }
 
     }
-
 }
-
-
 
 
 @media only screen and (max-width: 1024px) {
