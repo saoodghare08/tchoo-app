@@ -1,6 +1,7 @@
 .my-cart-page {
     padding-bottom: 80px;
     position: relative;
+    overflow-y: auto;
     &.modal-patch {
         &::before {
             content: "";
