@@ -64,7 +64,7 @@ export class CustomerInfoComponent implements OnInit {
   modalPatch: boolean = false;
   choosePayment: boolean = false;
   appycouponModal: boolean = false;
-
+  isOrderPlacedOverlayVisible: boolean = false;
   coupon_Code = this.fb.group({
     coupon_Code: ['']
   })
@@ -305,9 +305,7 @@ export class CustomerInfoComponent implements OnInit {
 
 
   payment(method: any) {
-    debugger;
-    this.app.commonLoader = true;
-  
+   // this.app.commonLoader = true;
     if (method === "Razorpay") {
       const razorpayOptions = {
         description: 'Sample Razorpay',
@@ -332,12 +330,14 @@ export class CustomerInfoComponent implements OnInit {
   
       const successCallback = (paymentId: any) => {
         console.log('Payment successful:', paymentId);
-        this.app.openSnackBar('Order has been placed successfully with Razorpay!');
-        this.app.commonLoader = false;
+        this.isOrderPlacedOverlayVisible = true;
   
-        // Navigate to success page
-        window.location.href = `Home/${this.createdby}`;
-
+        setTimeout(() => {
+          this.isOrderPlacedOverlayVisible = false;
+          this.app.openSnackBar('Order has been placed successfully with Razorpay!');
+          this.app.commonLoader = false;
+          window.location.href = `Home/${this.createdby}`;
+        }, 3000); 
       };
   
       const failureCallback = (error: any) => {
@@ -351,20 +351,19 @@ export class CustomerInfoComponent implements OnInit {
   
       Razorpay.open(razorpayOptions, successCallback, failureCallback);
     } else if (method === "COD") {
-      // Cash on Delivery scenario
-      this.app.openSnackBar('Order has been placed successfully with COD!');
-      this.app.commonLoader = false;
+      this.isOrderPlacedOverlayVisible = true;
   
-      // Navigate to success page or COD-specific page
-      window.location.href = `Home/${this.createdby}`;
-
+      setTimeout(() => {
+        this.isOrderPlacedOverlayVisible = false;
+        this.app.openSnackBar('Order has been placed successfully with COD!');
+        window.location.href = `Home/${this.createdby}`;
+      }, 2000); 
     } else {
       this.app.openSnackBar('Please select a valid payment method.');
       this.app.commonLoader = false;
     }
   }
-  
-  // select address pop up open
+
   showSelectAddressMd() {
     this.changeAddressopen = true;
     this.modalPatch = true;

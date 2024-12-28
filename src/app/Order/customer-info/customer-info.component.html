@@ -1,12 +1,15 @@
 <section class="customer-info-section {{selectedlanguage =='Arabic (عربي)' ? 'left-to-right':''}}"
+
   [ngClass]="{'modal-patch': modalPatch }">
   <!-- BACK TO PAGE -->
+
   <div class="back-top-page">
     <a (click)="backNavigation()">
       <img src="/assets/img/icons/back-arrow.svg" alt="arrow" />
       <span>{{selectedlanguage =='Arabic (عربي)' ? 'معلومات العميل':'Customer Information'}} </span>
     </a>
   </div>
+
   <!-- ORDER WIZARD -->
   <div class="order-wizard">
     <div class="stepper-wrapper">
@@ -228,21 +231,31 @@
     </div>
   </div>
 </div>
+
 <div class="choose-payment" [ngClass]="{'choose-payment-open': choosePayment }">
-  <!-- MODAL HEADER -->
-  <div class="modal-header">
-    <h5>{{selectedlanguage =='Arabic (عربي)' ?'اختر الدفع':'Choose Payment'}} </h5>
-    <a class="change-password-close-modal" (click)="choosePayCloseMd()"><i class="fa-solid fa-xmark"></i></a>
-  </div>
-  <!-- MODAL BODY -->
-  <div class="modal-body">
-    <!-- <div class="payment-bttn" *ngIf="device.os != 'Android'">
-      <button type="button" class="btn btn-default phonepe-bttn" (click)="payment('Razorpay')" style="color: #072654;">
-        <img src="/assets/img/payment/R1.png" alt="icon" width="40" /> <span>Razorpay</span></button>
-    </div> -->
-    <div class="payment-bttn">
-      <button type="button" class="btn btn-default" (click)="payment('COD')">
-          COD</button>
+  <div >
+    <!-- MODAL HEADER -->
+    <div class="modal-header">
+      <h5>{{selectedlanguage == 'Arabic (عربي)' ? 'اختر الدفع' : 'Choose Payment'}} </h5>
+      <a class="change-password-close-modal" (click)="choosePayCloseMd()">
+        <i class="fa-solid fa-xmark"></i>
+      </a>
+    </div>
+    <!-- MODAL BODY -->
+    <div class="modal-body">
+      <div class="payment-bttn">
+        <button type="button" class="btn btn-default" (click)="payment('COD')">COD</button>
+      </div>
     </div>
   </div>
+  <!-- Placeholder for order placed overlay -->
+
 </div>
+  <!-- <ng-template #orderPlacedContent> -->
+    <div *ngIf="isOrderPlacedOverlayVisible" class="order-placed-overlay">
+        <div>
+          <img src="assets/img/empty-state/OrderPlacedSuccessfully.gif" alt="Order Placed" />
+          <h5 class="text-white">Order Place Succussfully..</h5>
+        </div>
+    </div>
+  <!-- </ng-template> -->

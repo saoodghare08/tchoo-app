@@ -482,7 +482,27 @@
     }
 }
 
+.order-placed-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    background: white; /* Semi-transparent background */
+    z-index: 9999;
+  }
+  .order-placed-overlay img {
+    max-width: 100%;
+    height: auto;
+  }
 
+  .order-placed-overlay h5 {
+    font-size: 16px;
+  }
+  
 
 .change-address-modal {
     background-color: #ffffff;
