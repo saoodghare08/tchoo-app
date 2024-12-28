@@ -48,8 +48,9 @@
 
         ul {
             li {
-                display: block;
+                display: flex;
                 padding: 10px 0;
+                align-items: flex-start;
                 position: relative;
                 border-bottom: 1px solid rgb(235 235 235 / 80%);
 
@@ -60,10 +61,10 @@
                 .product-list-wrapper {
                     display: flex;
                     align-items: center;
+                    gap: 10px;
+                    width: 90%;
 
                     .product-list-img {
-                        margin-right: 20px;
-
                         .img {
                             width: 60px;
                             height: 60px;
@@ -77,10 +78,12 @@
                     }
 
                     .product-list-details {
+                        margin-right: 5px;
                         h4 {
                             color: #000000;
                             font-size: 12px;
                             word-break: break-word;
+                            line-height: 18px;
                         }
 
                         p,
@@ -102,17 +105,15 @@
                 .qty-view {
                     color: #ffffff;
                     font-size: 12px;
+                    background-color: #222222;
+                    border-radius: 50%;
+                    text-align: center;
+                    padding: 3px 9px;
                     position: absolute;
                     right: 0;
                     top: 50%;
                     transform: translateY(-50%);
                     -webkit-transform: translateY(-50%);
-                    background-color: #222222;
-                    border-radius: 50%;
-                    width: 30px;
-                    height: 30px;
-                    text-align: center;
-                    line-height: 30px;
                 }
             }
         }
@@ -448,7 +449,6 @@
         bottom: 0;
         left: 0;
         right: 0;
-        bottom: 0;
         height: 80px;
         background-color: #ffffff;
 
@@ -501,15 +501,12 @@
 /* TABLET VIEW MEDIA QUERY */
 @media only screen and (max-width: 768px) {
     .order-details-section {
-
         box-shadow: none;
 
         .order-details-bottom {
             width: 100%;
         }
     }
-
-
 }
 
 @media only screen and (max-width: 1024px) {
@@ -524,5 +521,6 @@
     .order-details-section {
         box-shadow: none;
         width: 100%;
+        height: auto;
     }
 }
