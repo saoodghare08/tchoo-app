@@ -8,7 +8,7 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-my-card',
   templateUrl: './my-card.component.html',
-  styleUrls: ['./my-card.component.scss'],
+  styleUrls: ['./my-card.component.scss', './place-rder-animation.scss']
 })
 export class MyCardComponent {
   createdby: any = this.activatedRoute.snapshot.params['userId'];
@@ -324,9 +324,26 @@ export class MyCardComponent {
     window.location.href='/Order/CustomerInfo/' + this.createdby + '/' + data.id + '/' + this.HubId;
   }
   // placeorder
-  Placeorderlocal() {
-    window.location.href='/Order/CustomerInfo/' + this.createdby + '/0/' + this.HubId;
+  isAnimating: boolean = false;
+  //createdby: string = '123'; // Example value, replace with actual dynamic value
+  //HubId: string = '456';    // Example value, replace with actual dynamic value
+
+  Placeorderlocal(): void {
+    if (!this.isAnimating) {
+      this.isAnimating = true;
+
+      // Reset animation state after 10 seconds
+      setTimeout(() => {
+        this.isAnimating = false;
+
+        // Redirect after animation completes
+        //window.location.href = `/Order/CustomerInfo/${this.createdby}/0/${this.HubId}`;
+      }, 7500);
+    }
   }
+
+
+
   // add to wishlist
   addedWishlist(data: any) {
     this.app.pageLoader = true;

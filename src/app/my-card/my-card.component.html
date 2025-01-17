@@ -1,4 +1,6 @@
-<section class="my-cart-page {{selectedlanguage =='Arabic (عربي)' ? 'left-to-right':''}}" [ngClass]="{'padding-class': paddingClss, 'modal-patch': modalPatch }">
+<section
+  class="my-cart-page {{selectedlanguage =='Arabic (عربي)' ? 'left-to-right':''}}"
+  [ngClass]="{'padding-class': paddingClss, 'modal-patch': modalPatch }">
   <!-- BACK TO PAGE -->
   <div class="back-top-page">
     <a (click)="backNavigation()">
@@ -20,58 +22,81 @@
   </div>
   <ng-template #new_address>
     <div class="add-new-address-wrapper">
-      <a href="/AddAddress/{{createdby}}/{{HubId}}/initial/Mycartaddr/0">+ {{selectedlanguage =='Arabic (عربي)'?'أض عنوانًا جديدًا':'Add a new address'}}</a>
+      <a href="/AddAddress/{{createdby}}/{{HubId}}/initial/Mycartaddr/0">+
+        {{selectedlanguage
+        =='Arabic (عربي)'?'أض عنوانًا جديدًا':'Add a new address'}}</a>
     </div>
   </ng-template>
   <!-- MY CART PRODUCT -->
   <div class="my-cart-product">
-    <div class="product-list mt-3" *ngFor="let product of mycart; let i = index;">
+    <div class="product-list mt-3"
+      *ngFor="let product of mycart; let i = index;">
       <div class="product">
         <div class="product-img">
           <div class="img">
-            <a href="/Main-Category/SubCategory/Category/Products/{{product.itemId}}/{{product.mainCategory}}/{{product.createdby}}/{{HubId}}/asc/0/0">
-              <img src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/Product-image/{{product.itemId}}_0.png" onerror="this.onerror=null; this.src='assets/img/category/no-image.png'" alt="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/Product-image/{{product.itemId}}_0.png" />
+            <a
+              href="/Main-Category/SubCategory/Category/Products/{{product.itemId}}/{{product.mainCategory}}/{{product.createdby}}/{{HubId}}/asc/0/0">
+              <img
+                src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/Product-image/{{product.itemId}}_0.png"
+                onerror="this.onerror=null; this.src='assets/img/category/no-image.png'"
+                alt="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/Product-image/{{product.itemId}}_0.png" />
             </a>
           </div>
         </div>
-        <div class="product-content" [ngClass]="{'out-of-stock': product.stockQty == 0}">
-          <a href="/Main-Category/SubCategory/Category/Products/{{product.itemId}}/{{product.mainCategory}}/{{product.createdby}}/{{HubId}}/asc/0/0"><h2>{{product.prodName}}</h2></a>
+        <div class="product-content"
+          [ngClass]="{'out-of-stock': product.stockQty == 0}">
+          <a
+            href="/Main-Category/SubCategory/Category/Products/{{product.itemId}}/{{product.mainCategory}}/{{product.createdby}}/{{HubId}}/asc/0/0"><h2>{{product.prodName}}</h2></a>
           <div class="d-flex" *ngIf="product.stockQty !=0">
             <h4>₹ </h4>
             <h6 id="{{product.id + '_priceid'}}">
-              {{product.price  | number : '1.0-0'}}
+              {{product.price | number : '1.0-0'}}
             </h6>
           </div>
           <div class="outOfStock" *ngIf="product.stockQty == 0">
-              <h5> {{selectedlanguage=='Arabic (عربي)'?'إنتهى من المخزن':'Out Of Stock'}}</h5>
+            <h5>
+              {{selectedlanguage=='Arabic (عربي)'?'إنتهى من المخزن':'Out Of Stock'}}</h5>
           </div>
         </div>
-        <div class="product-count"  *ngIf="product.stockQty != 0">
+        <div class="product-count" *ngIf="product.stockQty != 0">
           <div class="qty">
             <div class="minus" (click)="minus(product)">-</div>
-            <input type="number" class="count" id="{{product.id + '_productId'}}" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : ''" (keyup)="onInputUpdateqty(product,$event.target)"/>
+            <input type="number" class="count"
+              id="{{product.id + '_productId'}}" min="0"
+              oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : ''"
+              (keyup)="onInputUpdateqty(product,$event.target)" />
             <div class="plus" (click)="plus(product)">+</div>
           </div>
-       </div>
+        </div>
       </div>
       <div class="product-action-bttn" *ngIf="product.stockQty != 0">
-        <a (click)="addedWishlist(product)"><img src="/assets/img/icons/save-later.svg"
-            alt="save later" /><span>{{selectedlanguage =='Arabic (عربي)' ?'احفظ لوقت لاحق':'Save for later'}}
+        <a (click)="addedWishlist(product)"><img
+            src="/assets/img/icons/save-later.svg"
+            alt="save later" /><span>{{selectedlanguage =='Arabic (عربي)'
+            ?'احفظ لوقت لاحق':'Save for later'}}
           </span>
         </a>
-        <a (click)="openRemoveModal(product)" class="remove"><img src="/assets/img/icons/trash.svg"
-            alt="trash" /><span>{{selectedlanguage =='Arabic (عربي)' ?'يزيل':'Remove'}} </span></a>
-        <a (click)="BuyNow(product)"><img src="/assets/img/icons/cart.svg" alt="cart" /><span>{{selectedlanguage=='Arabic (عربي)' ?'شراء هذا الآن':'Buy this now'}}</span></a>
+        <a (click)="openRemoveModal(product)" class="remove"><img
+            src="/assets/img/icons/trash.svg"
+            alt="trash" /><span>{{selectedlanguage =='Arabic (عربي)'
+            ?'يزيل':'Remove'}} </span></a>
+        <a (click)="BuyNow(product)"><img src="/assets/img/icons/cart.svg"
+            alt="cart" /><span>{{selectedlanguage=='Arabic (عربي)'
+            ?'شراء هذا الآن':'Buy this now'}}</span></a>
       </div>
 
       <div class="product-action-bttn" *ngIf="product.stockQty == 0">
-        <a (click)="addedWishlist(product)"><img src="/assets/img/icons/save-later.svg"
-          alt="save later" /><span>{{selectedlanguage =='Arabic (عربي)' ?'احفظ لوقت لاحق':'Save for later'}}
-        </span></a>
-        <a (click)="openRemoveModal(product)" class="remove"><img src="/assets/img/icons/trash.svg"
-            alt="trash" /><span>{{selectedlanguage =='Arabic (عربي)' ?'يزيل':'Remove'}} </span></a>
+        <a (click)="addedWishlist(product)"><img
+            src="/assets/img/icons/save-later.svg"
+            alt="save later" /><span>{{selectedlanguage =='Arabic (عربي)'
+            ?'احفظ لوقت لاحق':'Save for later'}}
+          </span></a>
+        <a (click)="openRemoveModal(product)" class="remove"><img
+            src="/assets/img/icons/trash.svg"
+            alt="trash" /><span>{{selectedlanguage =='Arabic (عربي)'
+            ?'يزيل':'Remove'}} </span></a>
       </div>
-      
+
     </div>
   </div>
   <!-- EMPTY STATE -->
@@ -80,33 +105,42 @@
       <img src="/assets/img/empty-state/empty-state.png" alt="empty" />
     </div>
     <div class="empty-state-content">
-      <h2>{{selectedlanguage =='Arabic (عربي)' ?'عربة التسوق فارغة':'Your cart is empty'}}</h2>
-      <a href="Home/{{createdby}}">{{selectedlanguage =='Arabic (عربي)' ?'أضف المزيد':'Add more'}}</a>
+      <h2>{{selectedlanguage =='Arabic (عربي)'
+        ?'عربة التسوق فارغة':'Your cart is empty'}}</h2>
+      <a href="Home/{{createdby}}">{{selectedlanguage =='Arabic (عربي)'
+        ?'أضف المزيد':'Add more'}}</a>
     </div>
   </div>
   <!-- PRODUCT DETAILS -->
   <div class="product-details" *ngIf="TotalPrice!=0 ">
-    <h2>{{selectedlanguage =='Arabic (عربي)' ?'تفاصيل السعر':'Price details'}}</h2>
+    <h2>{{selectedlanguage =='Arabic (عربي)'
+      ?'تفاصيل السعر':'Price details'}}</h2>
     <ul>
       <li>
-        <span>{{selectedlanguage =='Arabic (عربي)' ? 'سعر':'Price'}} ( {{mycart?.length}} items)</span>
-        <span id="TotalPrice"> ₹ {{subTotal  | number : '1.0-0'}}</span>
+        <span>{{selectedlanguage =='Arabic (عربي)' ? 'سعر':'Price'}} (
+          {{mycart?.length}} items)</span>
+        <span id="TotalPrice"> ₹ {{subTotal | number : '1.0-0'}}</span>
       </li>
       <li>
-        <span>{{selectedlanguage =='Arabic (عربي)' ?'رسوم التوصيل':'Delivery Charges'}}</span>
-        <span> {{subTotal>165?'Free':selectedlanguage =='Arabic (عربي)' ?'﷼.32 ':'SAR 32'}}</span>
+        <span>{{selectedlanguage =='Arabic (عربي)'
+          ?'رسوم التوصيل':'Delivery Charges'}}</span>
+        <span> {{subTotal>165?'Free':selectedlanguage =='Arabic (عربي)'
+          ?'﷼.32 ':'SAR 32'}}</span>
       </li>
       <li class="total">
-        <span>{{selectedlanguage =='Arabic (عربي)' ?'المبلغ الإجمالي':'Total Amount'}} <p class="Inc-tax">(Inclusive of VAT {{Tax?.vatTaxpercent}}%)</p></span>
-          <span>₹ {{ (TotalPrice  +(DeliveryCharge)) | number : '1.0-0'}} </span>
+        <span>{{selectedlanguage =='Arabic (عربي)'
+          ?'المبلغ الإجمالي':'Total Amount'}} <p class="Inc-tax">(Inclusive of
+            VAT {{Tax?.vatTaxpercent}}%)</p></span>
+        <span>₹ {{ (TotalPrice +(DeliveryCharge)) | number : '1.0-0'}} </span>
       </li>
-      </ul>
+    </ul>
   </div>
   <!-- SECURE PAYMENT -->
   <div class="secure-payment mb-0">
     <h3>
       <img src="/assets/img/icons/right-batch.png" alt="batch">
-      <span class="m-2">{{selectedlanguage =='Arabic (عربي)' ?'دفع آمن ومضمون. منتج أصلي 100٪':'Safe and secure payment.100% authentic product'}}.</span>
+      <span class="m-2">{{selectedlanguage =='Arabic (عربي)'
+        ?'دفع آمن ومضمون. منتج أصلي 100٪':'Safe and secure payment.100% authentic product'}}.</span>
     </h3>
   </div>
   <!-- RECENTLY VIEWED -->
@@ -115,56 +149,86 @@
   <div class="place-order" *ngIf="TotalPrice!=0">
     <div class="place-order-wrapper">
       <div>
-        <h2>{{selectedlanguage =='Arabic (عربي)' ?'المجموع الإجمالي':'Grand Total'}} ₹ {{ (TotalPrice +((TotalPrice>165)?0:32))  | number : '1.0-0'}}</h2>
-        <a (click)="priceDetails()">{{selectedlanguage =='Arabic (عربي)' ?'عرض تفاصيل السعر':'View price details'}}</a>
+        <h2>{{selectedlanguage =='Arabic (عربي)'
+          ?'المجموع الإجمالي':'Grand Total'}} ₹ {{ (TotalPrice
+          +((TotalPrice>165)?0:32)) | number : '1.0-0'}}</h2>
+        <a (click)="priceDetails()">{{selectedlanguage =='Arabic (عربي)'
+          ?'عرض تفاصيل السعر':'View price details'}}</a>
       </div>
       <div>
-        <button type="button" class="btn btn-dark {{TotalPrice==0?'disabled':''}}" (click)="Placeorderlocal()">
-          {{selectedlanguage =='Arabic (عربي)' ?'ضع الطلب':'Place Order'}}</button>
+        <button class="placed-order-bttn" [class.animate]="isAnimating" (click)="Placeorderlocal()">
+          <span class="default" *ngIf="!isAnimating">Complete Order</span>
+          <span class="success" *ngIf="isAnimating">Order Placed <svg viewBox="0 0 12 10"><polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span>
+          <div class="box" *ngIf="isAnimating"></div>
+          <div class="truck" *ngIf="isAnimating">
+            <div class="back"></div>
+            <div class="front"><div class="window"></div></div>
+            <div class="light top"></div>
+            <div class="light bottom"></div>
+          </div>
+          <div class="lines" *ngIf="isAnimating"></div>
+        </button>
+        <!-- <button type="button" class="btn btn-dark {{TotalPrice==0?'disabled':''}}" (click)="Placeorderlocal()">
+          {{selectedlanguage =='Arabic (عربي)' ?'ضع الطلب':'Place Order'}}</button> -->
       </div>
     </div>
     <div class="payment-details-list" [class]="{'active': active}">
       <ul>
         <li>
-          <span>{{selectedlanguage =='Arabic (عربي)' ? 'سعر':'Price'}} ( {{mycart?.length}} items)</span>
+          <span>{{selectedlanguage =='Arabic (عربي)' ? 'سعر':'Price'}} (
+            {{mycart?.length}} items)</span>
           <span id="TotalPrice"> ₹ {{TotalPrice | number :'1.0-0'}}</span>
         </li>
         <li>
-          <span>{{selectedlanguage =='Arabic (عربي)' ?'رسوم التوصيل':'Delivery Charges'}}</span>
+          <span>{{selectedlanguage =='Arabic (عربي)'
+            ?'رسوم التوصيل':'Delivery Charges'}}</span>
           <span class="d-flex">
-            <p>{{subTotal>165?'Free':selectedlanguage =='Arabic (عربي)' ?'﷼.32 ':'SAR 32'}}</p>
+            <p>{{subTotal>165?'Free':selectedlanguage =='Arabic (عربي)'
+              ?'﷼.32 ':'SAR 32'}}</p>
           </span>
         </li>
-        <li class="">
-          <span>{{selectedlanguage =='Arabic (عربي)' ?'المبلغ الإجمالي':'Total Amount'}} </span>
+        <li class>
+          <span>{{selectedlanguage =='Arabic (عربي)'
+            ?'المبلغ الإجمالي':'Total Amount'}} </span>
           <span>₹ {{ (TotalPrice + (DeliveryCharge)) | number : '1.0-0'}}
           </span>
         </li>
         <li class="total">
-          <span>{{selectedlanguage =='Arabic (عربي)' ?'المبلغ الإجمالي الكلي':'Grand Total Amount'}}  <p class="Inc-tax">(Inclusive of VAT {{Tax?.vatTaxpercent}}%)</p></span>
-          <span>₹ {{ (TotalPrice +(DeliveryCharge))  | number : '1.0-0'}}</span>
+          <span>{{selectedlanguage =='Arabic (عربي)'
+            ?'المبلغ الإجمالي الكلي':'Grand Total Amount'}} <p
+              class="Inc-tax">(Inclusive of VAT
+              {{Tax?.vatTaxpercent}}%)</p></span>
+          <span>₹ {{ (TotalPrice +(DeliveryCharge)) | number : '1.0-0'}}</span>
         </li>
       </ul>
     </div>
   </div>
 </section>
 <!-- CONFIRMATION MODAL BOX -->
-<div class="conformation-modal" [ngClass]="{'conformation-modal-open': removeconformationModal }">
+<div class="conformation-modal"
+  [ngClass]="{'conformation-modal-open': removeconformationModal }">
   <div class="modal-header">
-    <h5>{{selectedlanguage =='Arabic (عربي)' ?'إزالة العنصر':'Item Remove'}}</h5>
-    <a class="conformation-modal-close" (click)="closeModal()"><i class="fa-solid fa-xmark"></i></a>
+    <h5>{{selectedlanguage =='Arabic (عربي)'
+      ?'إزالة العنصر':'Item Remove'}}</h5>
+    <a class="conformation-modal-close" (click)="closeModal()"><i
+        class="fa-solid fa-xmark"></i></a>
   </div>
   <div class="modal-body">
     <div class="conformation-modal-msg">
       <div class="icons"><i class="fa-solid fa-trash"></i></div>
-      <h3>{{selectedlanguage =='Arabic (عربي)' ?'هل أنت متأكد أنك تريد حذف؟':'Are you sure want to delete?'}}</h3>
+      <h3>{{selectedlanguage =='Arabic (عربي)'
+        ?'هل أنت متأكد أنك تريد حذف؟':'Are you sure want to delete?'}}</h3>
     </div>
     <div class="conformation-modal-btn">
       <div class="bttn-class">
-        <button type="button" class="btn btn-dark" (click)="addedWishlist(products)">{{selectedlanguage =='Arabic  (عربي)' ?'الانتقال إلى قائمة الرغبات':'Move To Wishlist'}}</button>
+        <button type="button" class="btn btn-dark"
+          (click)="addedWishlist(products)">{{selectedlanguage
+          =='Arabic  (عربي)'
+          ?'الانتقال إلى قائمة الرغبات':'Move To Wishlist'}}</button>
       </div>
       <div class="bttn-class">
-        <button type="button" class="btn btn-danger" (click)="RemoveProdFromCart(selectedProd,1)">{{selectedlanguage
+        <button type="button" class="btn btn-danger"
+          (click)="RemoveProdFromCart(selectedProd,1)">{{selectedlanguage
           =='Arabic (عربي)' ?'يزيل':'Remove'}}</button>
       </div>
     </div>

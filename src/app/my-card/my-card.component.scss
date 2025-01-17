@@ -30,7 +30,7 @@
         border-top: 1px solid #e9e9e9;
         border-bottom: 1px solid #e9e9e9;
         p {
-            color: #444444;
+            color: #00525b;
             font-size: 12px;
             font-weight: 500;
             line-height: 18px;
@@ -106,7 +106,7 @@
                         flex: 80% 0;
                     }
                     h2 {
-                        color: #000000;
+                        color: #00525b;
                         font-weight: 500;
                         font-size: 12px;
                         line-height: 20px;
@@ -119,7 +119,7 @@
                     }
 
                     h4 {
-                        color: #000000;
+                        color: #00525b;
                         font-weight: 400;
                         font-size: 14px;
                         display: -webkit-box;
@@ -131,7 +131,7 @@
                     }
 
                     h6 {
-                        color: #000000;
+                        color: #00525b;
                         font-weight: 500;
                         font-size: 16px;
                         line-height: 26px;
@@ -176,7 +176,7 @@
                             cursor: pointer;
                             display: inline-block;
                             vertical-align: top;
-                            color: #222222;
+                            color: #00525b;
                             width: 25px;
                             height: 25px;
                             overflow: hidden;
@@ -188,7 +188,7 @@
                             justify-content: center;
                             background-clip: padding-box;
                             background: #ffffff;
-                            border: 0.709691px solid #222222;
+                            border: 0.709691px solid #00525b;
                             &:hover {
                                 background-color: #f5f5f5;
                             }
@@ -215,7 +215,7 @@
 
                 a {
                     flex: auto;
-                    color: #222222;
+                    color: #00525b;
                     font-size: 12px;
                     font-weight: 500;
                     padding: 12px;
@@ -254,7 +254,7 @@
             -webkit-transform: translate(-50%, -50%);
 
             h3 {
-                color: #000000;
+                color: #00525b;
                 font-weight: 500;
                 font-size: 18px;
             }
@@ -269,7 +269,7 @@
         padding-bottom: 0;
         background-color: #ffffff;
         h2 {
-            color: #000000;
+            color: #00525b;
             font-weight: 500;
             font-size: 18px;
             margin-bottom: 20px;
@@ -349,7 +349,7 @@
           align-items: center;
           justify-content: space-between;
           h2 {
-            color: #000000;
+            color: #00525b;
             font-size: 14px;
             font-weight: 500;
             line-height: 18px;
@@ -386,6 +386,7 @@
 
       ul {
           li {
+            color: #00525b;
               display: flex;
               align-items: center;
               padding: 10px 0;
@@ -397,7 +398,7 @@
               }
               .Inc-tax{
                 font-size: 11px;
-                color:#999999
+                color:#00525b
               }
 
               &.last {
@@ -439,7 +440,7 @@
             }
 
             &:hover {
-              color: #000000;
+              color: #00525b;
             }
         }
       }
@@ -499,7 +500,7 @@
         flex: 50% 0;
         button,
         a {
-            color: #222222;
+            color: #00525b;
             height: 50px;
             border: 0;
             font-size: 14px;
@@ -561,7 +562,7 @@
                 flex: 50% 0;
                 button,
                 a {
-                    color: #222222;
+                    color: #00525b;
                     height: 50px;
                     border: 0;
                     font-size: 14px;

@@ -1,7 +1,7 @@
 .splash-screen-section {
   height: 100%;
   position: relative;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-image: url("/assets/img/account/splash-screen.png");
 
@@ -23,7 +23,7 @@
     right: 0;
     bottom: 0;
     position: absolute;
-   background-color: #fff;
+    background-color: #fff;
 
     h2 {
       color: #111111;
@@ -52,5 +52,12 @@
       border-radius: 12px;
       background-color: #222222;
     }
+  }
+}
+
+/* MOBILE VIEW MEDIA QUERY */
+@media only screen and (max-width: 480px) {
+  .splash-screen-section {
+    background-size: contain;
   }
 }
