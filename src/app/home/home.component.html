@@ -3,8 +3,8 @@
   <div class="user-title">
     <div class="d-flex align-items-center justify-content-between">
       <div class="title">
-        <h4>{{selectedlanguage =='Arabic (عربي)' ? 'مرحباً':'Hello'}},</h4>
-        <h3>{{userdetails?.fullName? userdetails?.fullName: 'Guest'}}</h3>
+        <h4 style="color: #1e1e1e;">{{selectedlanguage =='Arabic (عربي)' ? 'مرحباً':'Hello'}},</h4>
+        <h3 class="fw-bold" style="font-size: 30px;">{{userdetails?.fullName? userdetails?.fullName: 'Guest'}}</h3>
       </div>
       <div class="card-status" *ngIf="createdBy!=0">
         <a href="/MyCart/{{createdBy}}/{{HubId}}">
@@ -16,7 +16,7 @@
     <!-- COMMON SEARCH BOX -->
     <div class="common-search-box gap-2">
       <div class="common-search-input w-100">
-        <form (ngSubmit)="search()">
+        <form (ngSubmit)="search()" style="background-color: #f2f8f9 ;">
           <img src="/assets/img/icons/search.png" class="search-icon" alt="search" />
           <input type="text" placeholder="Search" name="searchValue" id="searchValue" [(ngModel)]="searchValue" />
         </form>
@@ -72,7 +72,7 @@
                 <img src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/category-images/{{mainCategory.mainCategoryId}}.png"
                 onerror="this.onerror=null; this.src='assets/img/category/no-image.png'" alt="items" width="100%" />
               </div>
-              <h5 class="text-center text-bold-600" style="color: #00525b;">{{mainCategory.name}}</h5>
+              <h5 class="text-center text-bold-600" style="color: #1e1e1e ;">{{mainCategory.name}}</h5>
           </a>
         </div>
       </div>
@@ -131,7 +131,7 @@
                 <h3>{{feat.pluName}}</h3>
               </a>
               <!-- <h6>₹ {{feat.sellingPrice}}</h6> -->
-              <p>₹ {{feat.sellingPrice}} <span class="offer-amount"
+              <p style="color: #1e1e1e;">₹ {{feat.sellingPrice}} <span class="offer-amount"
                   *ngIf="feat.offers?.length == 1">{{feat.manufracture}}</span></p>
               <!-- <p *ngIf="feat?.stockQty < 10 && feat?.stockQty != 0" class="fw-bold" style="font-size: 12px;color: #797979; margin: 0;">
              {{selectedlanguage=='Arabic (عربي)'?'مخزون محدود':'Limited Stock'}}

@@ -7,7 +7,7 @@ body {
 
 body {
     font-family: "Roboto", sans-serif !important;
-    background-color: #dddddd;
+    background-color: #f2f8f9 ;
     touch-action: none;
 
     .iti {
@@ -441,7 +441,7 @@ body {
                             width: 7.3px;
                             height: 7.3px;
                             padding: 0;
-                            background-color: #fff;
+                            background-color: #f2f8f9 ;
                             border-radius: 50%;
                             overflow: hidden;
                             margin: 0 auto;
@@ -832,9 +832,9 @@ body {
             }
 
             &.added-bttn {
-                color: #00525b;
-                border-color: #c0f3df;
-                background-color: #c0f3df;
+                color: #ffffff;
+                border-color: #00525b;
+                background-color: #00525b;
 
                 i {
                     margin-left: 2px;

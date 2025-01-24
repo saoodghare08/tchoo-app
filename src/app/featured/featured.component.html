@@ -20,8 +20,8 @@
     </div>
     <!-- COMMON SEARCH BOX -->
     <div class="common-search-box">
-      <div class="common-search-input">
-        <form (ngSubmit)="search()">
+      <div class="common-search-input" style="background-color: #f2f8f9 ;">
+        <form (ngSubmit)="search()" style="background-color: #f2f8f9 ;">
           <img src="/assets/img/icons/search.png" class="search-icon" alt="search" />
           <input type="text" placeholder="Search" name="searchValue" id="searchValue" [(ngModel)]="searchValue" />
         </form>
